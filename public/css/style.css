@@ -404,6 +404,108 @@ button {
   30% { transform: translateY(-5px); }
 }
 
+/* ===== Game Map Widget ===== */
+.game-map {
+  margin-bottom: 1.25rem;
+  animation: fadeUp 0.3s ease;
+}
+.game-map__label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.game-map__label strong {
+  color: var(--accent);
+}
+.game-map__img {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+/* ===== Game Travel ===== */
+.game-travel {
+  animation: fadeUp 0.3s ease;
+}
+.game-travel__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.game-travel__icon {
+  font-size: 1.5rem;
+}
+.game-travel__title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+}
+.game-travel__text {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+.game-travel__map-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 1rem;
+}
+.game-travel__map {
+  width: 100%;
+  display: block;
+  transition: opacity 1.2s ease;
+}
+.game-travel__map--to {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.game-travel__progress {
+  margin-bottom: 1rem;
+}
+.game-travel__bar {
+  height: 6px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.4rem;
+}
+.game-travel__bar-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent), var(--success));
+  border-radius: 3px;
+  transition: width 3s ease-in-out;
+}
+.game-travel__locations {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.game-travel__arrived {
+  text-align: center;
+  margin-top: 1rem;
+  animation: fadeUp 0.4s ease;
+}
+.game-travel__arrived-text {
+  font-size: 0.9rem;
+  color: var(--success);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
 /* ===== Scrollbar ===== */
 .game-container::-webkit-scrollbar { width: 4px; }
 .game-container::-webkit-scrollbar-track { background: transparent; }

@@ -11,83 +11,64 @@
   },
   "game": {
     "welcomeTitle": "Welcome, Adventurer!",
-    "welcomeText": "You have just arrived in the kingdom. The roads are long and full of surprises. Use /report to begin your adventure.",
+    "welcomeText": "You have just arrived in the kingdom. The roads are long and full of surprises — random encounters await at every turn. Let's see what lies ahead...",
     "startButton": "Begin your journey",
-    "choicePrompt": "What will you do?",
-    "resultTitle": "Result",
-    "nextEvent": "Continue your journey",
-    "continueAdventure": "Continue the adventure on Discord!",
+    "nextEvent": "Continue",
     "joinDiscord": "Join the adventure on Discord",
     "finalTitle": "Your adventure awaits!",
     "finalText": "You've had a taste of what Crownicles has to offer. Join thousands of players on Discord and write your own story!",
-    "log": "{{name}}'s log:",
-    "playerName": "Adventurer",
+    "travelTitle": "Traveling...",
+    "travelText": "You leave {{from}} and head towards {{to}}.",
+    "travelArrived": "You have arrived at {{location}}.",
+    "locationLabel": "Current location",
+    "locations": {
+      "oldsterForest": "Oldster Forest",
+      "bougCoton": "Boug-Coton"
+    },
     "events": [
-      {
-        "text": "A tree has fallen on the path and is blocking the way!",
-        "choices": [
-          {
-            "emoji": "🪓",
-            "label": "Fell the tree and continue.",
-            "outcome": "Felling this tree took half an hour, but you manage to clear the path! You earn a few coins that were hidden under the trunk.",
-            "reward": "+10 💰"
-          },
-          {
-            "emoji": "🚶",
-            "label": "Go another way.",
-            "outcome": "Going another way seemed to be a great decision — you found a shortcut and didn't waste any time!",
-            "reward": "+15 min ⏱️"
-          }
-        ]
-      },
-      {
-        "text": "As you pass a lake, you notice a man who seems to be having difficulties on his fishing trip!",
-        "choices": [
-          {
-            "emoji": "🤝",
-            "label": "Offer your help.",
-            "outcome": "Thanks to you, the man catches a superb fish! To thank you, he offers you something that could be useful...",
-            "reward": "+1 🎒 Item"
-          },
-          {
-            "emoji": "🏃",
-            "label": "Keep going, no time to waste!",
-            "outcome": "You don't have even a minute to lose to help a fisherman! You go your way and press on towards your destination.",
-            "reward": "+10 min ⏱️"
-          }
-        ]
-      },
       {
         "text": "As you get ready to enter a forest, a mysterious woman explains there is a shorter path through the west.",
         "choices": [
           {
             "emoji": "🧭",
             "label": "Follow the advice of the mysterious woman.",
-            "outcome": "It was indeed a shortcut! You saved a lot of time and arrive at a village ahead of schedule.",
-            "reward": "+25 ⭐ XP"
+            "outcome": "It was indeed a shortcut!",
+            "reward": "+30 min ⏱️"
           },
           {
             "emoji": "🌲",
             "label": "Cross the forest anyway.",
-            "outcome": "You get lost for several hours in the forest but find your way out unscathed. On your way out, you pick up an item that may be useful!",
+            "outcome": "You get lost for several hours in the forest but find your way out unscathed. On your way out, you pick up an item that may be useful to you!",
             "reward": "+1 🎒 Item"
+          },
+          {
+            "emoji": "↩️",
+            "label": "Avoid the forest by going the opposite way.",
+            "outcome": "You're not sure why you took a route 10 times longer than you originally planned, but you finally arrived at the right place.",
+            "reward": "-60 min ⏱️"
           }
         ]
       },
       {
-        "text": "You stumble upon a traveling merchant who seems eager to make a deal!",
+        "text": "After spending several weeks walking without any human encounter, you finally enter a small town that seems rather lively.",
         "choices": [
           {
-            "emoji": "💎",
-            "label": "Browse his mysterious wares.",
-            "outcome": "Among the trinkets, you find a rare amulet that glows faintly. The merchant lets you have it for a fair price.",
-            "reward": "+1 💎 Gem"
+            "emoji": "⚒️",
+            "label": "Go to the forge.",
+            "outcome": "No one is in the forge, which seems to have been abandoned for years. Before leaving, however, you notice an object that could be useful for the rest of your adventure...",
+            "reward": "+1 🎒 Item"
           },
           {
-            "emoji": "👋",
-            "label": "Politely decline and move on.",
-            "outcome": "You wave goodbye and continue on your way. Sometimes the best adventures are the ones you choose to skip.",
-            "reward": "+5 ⭐ XP"
+            "emoji": "🛏️",
+            "label": "Go to the inn.",
+            "outcome": "You pay for a room for the night and fall down on the bed. You will need to sleep before resuming the adventure.",
+            "reward": "+HP ❤️"
+          },
+          {
+            "emoji": "🏪",
+            "label": "Go to the market.",
+            "outcome": "You explore the market for 30 minutes before discovering a small object on the ground that could be useful to you...",
+            "reward": "+1 🎒 Item"
           }
         ]
       }

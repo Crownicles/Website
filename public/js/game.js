@@ -1,16 +1,27 @@
 /**
- * Game simulation – simple card-based UI.
+ * Game simulation – card-based UI with map & travel animation.
  */
 
-import { t } from './i18n.js';
+import { t, getLocale } from './i18n.js';
 
 const DISCORD_INVITE = 'https://discord.gg/WwgBfSg';
 const TYPING_DELAY = 700;
 
-let currentIndex = 0;
+/* Map image URLs from the Crownicles CDN */
+const MAP_CURSOR_URL = (lang, locId) =>
+  `https://crownicles.com/public/ressources/mapsCursed/${lang}_${locId}_map.jpg`;
+
+/* The two locations used in the demo */
+const LOCATIONS = [
+  { id: 4, key: 'oldsterForest' },  // Oldster Forest
+  { id: 6, key: 'bougCoton' },      // Boug-Coton (village)
+];
+
+let currentStep = 0; // 0=welcome, 1=event0, 2=travel, 3=event1, 4=final
 let events = [];
 let overlay, container;
 
+/* ---- Overlay lifecycle ---- */
 function createOverlay() {
   overlay = document.createElement('div');
   overlay.className = 'game-overlay';
@@ -31,7 +42,7 @@ function createOverlay() {
 function openGame() {
   if (!overlay) createOverlay();
   events = t('game.events');
-  currentIndex = 0;
+  currentStep = 0;
   overlay.classList.add('game-overlay--active');
   document.body.style.overflow = 'hidden';
   renderWelcome();
@@ -44,19 +55,37 @@ function closeGame() {
   }
 }
 
+/* ---- Progress bar: welcome → event 1 → travel → event 2 → final ---- */
 function progressHTML() {
-  const total = events.length || 4;
-  return `<div class="game-progress">${Array.from({ length: total }, (_, i) => {
+  const steps = 5;
+  return `<div class="game-progress">${Array.from({ length: steps }, (_, i) => {
     let cls = 'game-progress__dot';
-    if (i < currentIndex) cls += ' game-progress__dot--done';
-    else if (i === currentIndex) cls += ' game-progress__dot--active';
+    if (i < currentStep) cls += ' game-progress__dot--done';
+    else if (i === currentStep) cls += ' game-progress__dot--active';
     return `<div class="${cls}"></div>`;
   }).join('')}</div>`;
 }
 
+/* ---- Map widget ---- */
+function mapHTML(locId, label) {
+  const lang = getLocale();
+  const src = MAP_CURSOR_URL(lang, locId);
+  return `
+    <div class="game-map">
+      <div class="game-map__label">📍 ${t('game.locationLabel')}: <strong>${label}</strong></div>
+      <img class="game-map__img" src="${src}" alt="Map – ${label}">
+    </div>`;
+}
+
+/* ---- Step: Welcome ---- */
 function renderWelcome() {
+  currentStep = 0;
+  const loc = LOCATIONS[0];
+  const locName = t(`game.locations.${loc.key}`);
+
   container.innerHTML = `
     ${progressHTML()}
+    ${mapHTML(loc.id, locName)}
     <div class="game-card">
       <div class="game-card__icon">👑</div>
       <div class="game-card__title">${t('game.welcomeTitle')}</div>
@@ -69,13 +98,18 @@ function renderWelcome() {
   container.querySelector('#game-start').addEventListener('click', () => renderEvent(0));
 }
 
+/* ---- Step: Event ---- */
 function renderEvent(index) {
-  currentIndex = index;
+  currentStep = index === 0 ? 1 : 3;
   const ev = events[index];
   if (!ev) { renderFinal(); return; }
 
+  const loc = LOCATIONS[index];
+  const locName = t(`game.locations.${loc.key}`);
+
   container.innerHTML = `
     ${progressHTML()}
+    ${mapHTML(loc.id, locName)}
     <div class="game-card">
       <div class="game-card__text">${ev.text}</div>
     </div>
@@ -94,6 +128,7 @@ function renderEvent(index) {
   });
 }
 
+/* ---- Handle choice & show outcome ---- */
 function handleChoice(evIdx, choiceIdx) {
   const choice = events[evIdx].choices[choiceIdx];
 
@@ -118,20 +153,95 @@ function handleChoice(evIdx, choiceIdx) {
     const isLast = evIdx >= events.length - 1;
     actions.innerHTML = `
       <button class="btn btn--primary btn--small" id="game-next">
-        ${isLast ? t('game.continueAdventure') : t('game.nextEvent')} →
+        ${t('game.nextEvent')} →
       </button>
     `;
     result.after(actions);
 
     actions.querySelector('#game-next').addEventListener('click', () => {
-      isLast ? renderFinal() : renderEvent(evIdx + 1);
+      if (isLast) {
+        renderFinal();
+      } else {
+        renderTravel();
+      }
     });
 
     result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }, TYPING_DELAY);
 }
 
+/* ---- Step: Travel animation ---- */
+function renderTravel() {
+  currentStep = 2;
+  const from = LOCATIONS[0];
+  const to = LOCATIONS[1];
+  const fromName = t(`game.locations.${from.key}`);
+  const toName = t(`game.locations.${to.key}`);
+  const lang = getLocale();
+
+  container.innerHTML = `
+    ${progressHTML()}
+    <div class="game-travel">
+      <div class="game-travel__header">
+        <span class="game-travel__icon">🗺️</span>
+        <span class="game-travel__title">${t('game.travelTitle')}</span>
+      </div>
+      <div class="game-travel__text">${t('game.travelText', { from: fromName, to: toName })}</div>
+      <div class="game-travel__map-wrapper">
+        <img class="game-travel__map game-travel__map--from"
+             src="${MAP_CURSOR_URL(lang, from.id)}"
+             alt="Map – ${fromName}">
+        <img class="game-travel__map game-travel__map--to"
+             src="${MAP_CURSOR_URL(lang, to.id)}"
+             alt="Map – ${toName}"
+             style="opacity:0;">
+      </div>
+      <div class="game-travel__progress">
+        <div class="game-travel__bar">
+          <div class="game-travel__bar-fill" id="travel-fill"></div>
+        </div>
+        <div class="game-travel__locations">
+          <span>${fromName}</span>
+          <span>${toName}</span>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Animate the travel
+  const fill = container.querySelector('#travel-fill');
+  const fromImg = container.querySelector('.game-travel__map--from');
+  const toImg = container.querySelector('.game-travel__map--to');
+
+  requestAnimationFrame(() => {
+    fill.style.width = '100%';
+  });
+
+  // Cross-fade maps at 50%
+  setTimeout(() => {
+    fromImg.style.opacity = '0';
+    toImg.style.opacity = '1';
+  }, 1500);
+
+  // Show arrival after animation completes
+  setTimeout(() => {
+    const arrived = document.createElement('div');
+    arrived.className = 'game-travel__arrived';
+    arrived.innerHTML = `
+      <div class="game-travel__arrived-text">📍 ${t('game.travelArrived', { location: toName })}</div>
+      <button class="btn btn--primary btn--small" id="travel-continue">${t('game.nextEvent')} →</button>
+    `;
+    container.querySelector('.game-travel').appendChild(arrived);
+
+    container.querySelector('#travel-continue').addEventListener('click', () => {
+      renderEvent(1);
+    });
+  }, 3200);
+}
+
+/* ---- Step: Final CTA ---- */
 function renderFinal() {
+  currentStep = 4;
   container.innerHTML = `
     ${progressHTML()}
     <div class="game-final">

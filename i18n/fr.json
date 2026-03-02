@@ -11,83 +11,64 @@
   },
   "game": {
     "welcomeTitle": "Bienvenue, Aventurier !",
-    "welcomeText": "Vous venez d'arriver dans le royaume. Les routes sont longues et pleines de surprises. Utilisez /report pour commencer votre aventure.",
-    "startButton": "Commencer votre voyage",
-    "choicePrompt": "Que ferez-vous ?",
-    "resultTitle": "Résultat",
-    "nextEvent": "Continuer votre voyage",
-    "continueAdventure": "Continuez l'aventure sur Discord !",
+    "welcomeText": "Vous venez d'arriver dans le royaume. Les routes sont longues et pleines de surprises — des rencontres aléatoires vous attendent à chaque tournant. Voyons ce qui vous attend...",
+    "startButton": "Commencer le voyage",
+    "nextEvent": "Continuer",
     "joinDiscord": "Rejoindre l'aventure sur Discord",
     "finalTitle": "Votre aventure vous attend !",
     "finalText": "Vous avez eu un aperçu de ce que Crownicles a à offrir. Rejoignez des milliers de joueurs sur Discord et écrivez votre propre histoire !",
-    "log": "Journal de {{name}} :",
-    "playerName": "Aventurier",
+    "travelTitle": "En voyage...",
+    "travelText": "Vous quittez {{from}} et vous dirigez vers {{to}}.",
+    "travelArrived": "Vous êtes arrivé à {{location}}.",
+    "locationLabel": "Position actuelle",
+    "locations": {
+      "oldsterForest": "Forêt d'Oldster",
+      "bougCoton": "Boug-Coton"
+    },
     "events": [
       {
-        "text": "Un arbre est tombé sur le chemin et bloque le passage !",
-        "choices": [
-          {
-            "emoji": "🪓",
-            "label": "Couper l'arbre et continuer.",
-            "outcome": "Abattre cet arbre vous prend une demi-heure, mais vous parvenez à dégager le chemin ! Vous obtenez quelques pièces cachées sous le tronc.",
-            "reward": "+10 💰"
-          },
-          {
-            "emoji": "🚶",
-            "label": "Prendre un autre chemin.",
-            "outcome": "Prendre un autre chemin s'avère être une excellente décision — vous trouvez un raccourci et ne perdez pas de temps !",
-            "reward": "+15 min ⏱️"
-          }
-        ]
-      },
-      {
-        "text": "En passant près d'un lac, vous remarquez un homme qui semble avoir du mal avec sa pêche !",
-        "choices": [
-          {
-            "emoji": "🤝",
-            "label": "Proposer votre aide.",
-            "outcome": "Grâce à vous, l'homme attrape un superbe poisson ! Pour vous remercier, il vous offre quelque chose qui pourrait être utile...",
-            "reward": "+1 🎒 Objet"
-          },
-          {
-            "emoji": "🏃",
-            "label": "Continuer, pas de temps à perdre !",
-            "outcome": "Pas une minute à perdre pour aider un pêcheur ! Vous poursuivez votre route et pressez le pas vers votre destination.",
-            "reward": "+10 min ⏱️"
-          }
-        ]
-      },
-      {
-        "text": "Alors que vous vous apprêtez à entrer dans une forêt, une femme mystérieuse vous explique qu'il existe un chemin plus court par l'ouest.",
+        "text": "Alors que vous vous apprêtez à rentrer dans une forêt, une inconnue vous explique qu'il existe un chemin plus court en passant par l'ouest.",
         "choices": [
           {
             "emoji": "🧭",
-            "label": "Suivre le conseil de la femme mystérieuse.",
-            "outcome": "C'était effectivement un raccourci ! Vous gagnez beaucoup de temps et arrivez dans un village en avance.",
-            "reward": "+25 ⭐ XP"
+            "label": "Suivre les conseils de l'inconnue.",
+            "outcome": "C'était en effet un raccourci !",
+            "reward": "+30 min ⏱️"
           },
           {
             "emoji": "🌲",
-            "label": "Traverser la forêt malgré tout.",
-            "outcome": "Vous vous perdez pendant plusieurs heures dans la forêt, mais vous en sortez indemne. En chemin, vous ramassez un objet qui pourrait être utile !",
+            "label": "Traverser quand même la forêt.",
+            "outcome": "Vous vous perdez pendant plusieurs heures dans la forêt mais finissez par en sortir sans dégâts. En sortant, vous ramassez un objet qui pourra peut-être vous être utile !",
             "reward": "+1 🎒 Objet"
+          },
+          {
+            "emoji": "↩️",
+            "label": "Éviter la forêt en partant du côté opposé.",
+            "outcome": "Vous ne savez pas trop pourquoi vous avez pris un chemin 10 fois plus long que celui que vous aviez prévu au départ mais vous avez fini par arriver à bon port.",
+            "reward": "-60 min ⏱️"
           }
         ]
       },
       {
-        "text": "Vous tombez sur un marchand ambulant qui semble impatient de conclure une affaire !",
+        "text": "Après avoir passé plusieurs semaines à marcher sans effectuer la moindre rencontre humaine, vous entrez finalement dans une petite bourgade qui semble plutôt animée.",
         "choices": [
           {
-            "emoji": "💎",
-            "label": "Examiner ses marchandises mystérieuses.",
-            "outcome": "Parmi les bibelots, vous trouvez une amulette rare qui brille faiblement. Le marchand vous la cède à un prix correct.",
-            "reward": "+1 💎 Gemme"
+            "emoji": "⚒️",
+            "label": "Aller à la forge.",
+            "outcome": "Personne n'est présent dans la forge qui semble abandonnée depuis des années. Avant de partir vous remarquez cependant un objet qui pourrait vous servir pour la suite de votre aventure...",
+            "reward": "+1 🎒 Objet"
           },
           {
-            "emoji": "👋",
-            "label": "Décliner poliment et poursuivre.",
-            "outcome": "Vous saluez le marchand et continuez votre route. Parfois, les meilleures aventures sont celles que l'on choisit de ne pas vivre.",
-            "reward": "+5 ⭐ XP"
+            "emoji": "🛏️",
+            "label": "Aller à l'auberge.",
+            "outcome": "Vous payez une chambre pour la nuit et tombez effondré sur le lit. Il faudra dormir avant de reprendre l'aventure.",
+            "reward": "+HP ❤️"
+          },
+          {
+            "emoji": "🏪",
+            "label": "Aller au marché.",
+            "outcome": "Vous explorez le marché en 30 minutes avant de découvrir un petit objet au sol qui pourrait vous être utile...",
+            "reward": "+1 🎒 Objet"
           }
         ]
       }
