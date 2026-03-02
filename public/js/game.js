@@ -7,14 +7,10 @@ import { t, getLocale } from './i18n.js';
 const DISCORD_INVITE = 'https://discord.gg/WwgBfSg';
 const TYPING_DELAY = 700;
 
-/* Map image URLs from the Crownicles CDN */
-const MAP_CURSOR_URL = (lang, locId) =>
-  `https://crownicles.com/public/ressources/mapsCursed/${lang}_${locId}_map.jpg`;
-
-/* The two locations used in the demo */
+/* The two locations used in the demo, with marker positions (% of map) */
 const LOCATIONS = [
-  { id: 4, key: 'oldsterForest' },  // Oldster Forest
-  { id: 6, key: 'bougCoton' },      // Boug-Coton (village)
+  { id: 1, key: 'sentinelBeach', x: 12.5, y: 5.2 },   // Sentinel Beach
+  { id: 6, key: 'bougCoton',     x: 13.9, y: 35.3 },   // Boug-Coton
 ];
 
 let currentStep = 0; // 0=welcome, 1=event0, 2=travel, 3=event1, 4=final
@@ -66,26 +62,26 @@ function progressHTML() {
   }).join('')}</div>`;
 }
 
-/* ---- Map widget ---- */
-function mapHTML(locId, label) {
-  const lang = getLocale();
-  const src = MAP_CURSOR_URL(lang, locId);
+/* ---- Map widget with CSS marker ---- */
+function mapHTML(locIndex) {
+  const loc = LOCATIONS[locIndex];
+  const label = t(`game.locations.${loc.key}`);
   return `
     <div class="game-map">
       <div class="game-map__label">📍 ${t('game.locationLabel')}: <strong>${label}</strong></div>
-      <img class="game-map__img" src="${src}" alt="Map – ${label}">
+      <div class="game-map__container">
+        <img class="game-map__img" src="./public/images/map.webp" alt="Map – ${label}">
+        <div class="game-map__marker" style="left:${loc.x}%;top:${loc.y}%"></div>
+      </div>
     </div>`;
 }
 
 /* ---- Step: Welcome ---- */
 function renderWelcome() {
   currentStep = 0;
-  const loc = LOCATIONS[0];
-  const locName = t(`game.locations.${loc.key}`);
-
   container.innerHTML = `
     ${progressHTML()}
-    ${mapHTML(loc.id, locName)}
+    ${mapHTML(0)}
     <div class="game-card">
       <div class="game-card__icon">👑</div>
       <div class="game-card__title">${t('game.welcomeTitle')}</div>
@@ -104,12 +100,9 @@ function renderEvent(index) {
   const ev = events[index];
   if (!ev) { renderFinal(); return; }
 
-  const loc = LOCATIONS[index];
-  const locName = t(`game.locations.${loc.key}`);
-
   container.innerHTML = `
     ${progressHTML()}
-    ${mapHTML(loc.id, locName)}
+    ${mapHTML(index)}
     <div class="game-card">
       <div class="game-card__text">${ev.text}</div>
     </div>
@@ -131,6 +124,7 @@ function renderEvent(index) {
 /* ---- Handle choice & show outcome ---- */
 function handleChoice(evIdx, choiceIdx) {
   const choice = events[evIdx].choices[choiceIdx];
+  const isLast = evIdx >= events.length - 1;
 
   container.querySelectorAll('.game-choice').forEach((btn, i) => {
     btn.classList.add('game-choice--disabled');
@@ -143,41 +137,59 @@ function handleChoice(evIdx, choiceIdx) {
   container.querySelector('#choices').after(result);
 
   setTimeout(() => {
-    result.innerHTML = `
-      <div class="game-result__outcome">${choice.outcome}</div>
-      <div class="game-result__reward">${choice.reward}</div>
-    `;
+    if (isLast) {
+      /* For the last event, tease the result and show Discord CTA instead */
+      result.innerHTML = `
+        <div class="game-teaser">
+          <div class="game-teaser__icon">✨</div>
+          <div class="game-teaser__title">${t('game.teaserTitle')}</div>
+          <div class="game-teaser__text">${t('game.teaserText')}</div>
+        </div>
+      `;
 
-    const actions = document.createElement('div');
-    actions.className = 'game-actions';
-    const isLast = evIdx >= events.length - 1;
-    actions.innerHTML = `
-      <button class="btn btn--primary btn--small" id="game-next">
-        ${t('game.nextEvent')} →
-      </button>
-    `;
-    result.after(actions);
+      const actions = document.createElement('div');
+      actions.className = 'game-actions';
+      actions.innerHTML = `
+        <a href="${DISCORD_INVITE}" target="_blank" rel="noopener" class="btn btn--discord">
+          <svg class="btn__icon" viewBox="0 0 71 55" fill="currentColor">
+            <path d="M60.1 4.9A58.5 58.5 0 0045.4.2a.2.2 0 00-.2.1 40.8 40.8 0 00-1.8 3.7 54 54 0 00-16.2 0A37.3 37.3 0 0025.4.3a.2.2 0 00-.2-.1A58.4 58.4 0 0010.5 4.9.2.2 0 0010.4 5C1.5 18.4-.9 31.4.3 44.3v.1a58.7 58.7 0 0017.7 9 .2.2 0 00.3-.1 42 42 0 003.6-5.9.2.2 0 00-.1-.3 38.7 38.7 0 01-5.5-2.6.2.2 0 01 0-.4l1.1-.9a.2.2 0 01.2 0 41.9 41.9 0 0035.6 0 .2.2 0 01.2 0l1.1.9a.2.2 0 010 .4 36.4 36.4 0 01-5.5 2.6.2.2 0 00-.1.3 47.2 47.2 0 003.6 5.9.2.2 0 00.3.1A58.5 58.5 0 0070.3 44.3v-.1C71.7 29.5 67.8 16.6 60.2 5a.2.2 0 00-.1-.1zM23.7 36.3c-3.4 0-6.2-3.1-6.2-7s2.8-7 6.2-7 6.3 3.2 6.2 7-2.7 7-6.2 7zm23 0c-3.4 0-6.2-3.1-6.2-7s2.8-7 6.2-7 6.3 3.2 6.2 7-2.7 7-6.2 7z"/>
+          </svg>
+          ${t('game.joinDiscord')}
+        </a>
+      `;
+      result.after(actions);
+    } else {
+      /* Normal event: show outcome + reward + continue button */
+      result.innerHTML = `
+        <div class="game-result__outcome">${choice.outcome}</div>
+        <div class="game-result__reward">${choice.reward}</div>
+      `;
 
-    actions.querySelector('#game-next').addEventListener('click', () => {
-      if (isLast) {
-        renderFinal();
-      } else {
+      const actions = document.createElement('div');
+      actions.className = 'game-actions';
+      actions.innerHTML = `
+        <button class="btn btn--primary btn--small" id="game-next">
+          ${t('game.nextEvent')} →
+        </button>
+      `;
+      result.after(actions);
+
+      actions.querySelector('#game-next').addEventListener('click', () => {
         renderTravel();
-      }
-    });
+      });
+    }
 
     result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }, TYPING_DELAY);
 }
 
-/* ---- Step: Travel animation ---- */
+/* ---- Step: Travel animation (single map, moving marker) ---- */
 function renderTravel() {
   currentStep = 2;
   const from = LOCATIONS[0];
   const to = LOCATIONS[1];
   const fromName = t(`game.locations.${from.key}`);
   const toName = t(`game.locations.${to.key}`);
-  const lang = getLocale();
 
   container.innerHTML = `
     ${progressHTML()}
@@ -187,14 +199,10 @@ function renderTravel() {
         <span class="game-travel__title">${t('game.travelTitle')}</span>
       </div>
       <div class="game-travel__text">${t('game.travelText', { from: fromName, to: toName })}</div>
-      <div class="game-travel__map-wrapper">
-        <img class="game-travel__map game-travel__map--from"
-             src="${MAP_CURSOR_URL(lang, from.id)}"
-             alt="Map – ${fromName}">
-        <img class="game-travel__map game-travel__map--to"
-             src="${MAP_CURSOR_URL(lang, to.id)}"
-             alt="Map – ${toName}"
-             style="opacity:0;">
+      <div class="game-map__container game-travel__map-wrapper">
+        <img class="game-map__img" src="./public/images/map.webp" alt="Map">
+        <div class="game-map__marker game-map__marker--travel" id="travel-marker"
+             style="left:${from.x}%;top:${from.y}%"></div>
       </div>
       <div class="game-travel__progress">
         <div class="game-travel__bar">
@@ -208,20 +216,15 @@ function renderTravel() {
     </div>
   `;
 
-  // Animate the travel
   const fill = container.querySelector('#travel-fill');
-  const fromImg = container.querySelector('.game-travel__map--from');
-  const toImg = container.querySelector('.game-travel__map--to');
+  const marker = container.querySelector('#travel-marker');
 
+  // Start animations
   requestAnimationFrame(() => {
     fill.style.width = '100%';
+    marker.style.left = `${to.x}%`;
+    marker.style.top = `${to.y}%`;
   });
-
-  // Cross-fade maps at 50%
-  setTimeout(() => {
-    fromImg.style.opacity = '0';
-    toImg.style.opacity = '1';
-  }, 1500);
 
   // Show arrival after animation completes
   setTimeout(() => {

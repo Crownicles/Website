@@ -419,10 +419,36 @@ button {
 .game-map__label strong {
   color: var(--accent);
 }
+.game-map__container {
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
 .game-map__img {
   width: 100%;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
+  display: block;
+}
+.game-map__marker {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #e74c3c;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.4), 0 2px 8px rgba(0,0,0,0.5);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  animation: markerPulse 2s ease-in-out infinite;
+}
+.game-map__marker--travel {
+  transition: left 3s ease-in-out, top 3s ease-in-out;
+  animation: none;
+}
+
+@keyframes markerPulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.4), 0 2px 8px rgba(0,0,0,0.5); }
+  50% { box-shadow: 0 0 0 8px rgba(231, 76, 60, 0.15), 0 2px 8px rgba(0,0,0,0.5); }
 }
 
 /* ===== Game Travel ===== */
@@ -450,24 +476,10 @@ button {
   line-height: 1.6;
 }
 .game-travel__map-wrapper {
-  position: relative;
-  width: 100%;
   border-radius: var(--radius-sm);
   overflow: hidden;
   border: 1px solid var(--border);
   margin-bottom: 1rem;
-}
-.game-travel__map {
-  width: 100%;
-  display: block;
-  transition: opacity 1.2s ease;
-}
-.game-travel__map--to {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 .game-travel__progress {
   margin-bottom: 1rem;
@@ -504,6 +516,34 @@ button {
   color: var(--success);
   font-weight: 600;
   margin-bottom: 0.75rem;
+}
+
+/* ===== Game Teaser (Discord CTA before result) ===== */
+.game-teaser {
+  text-align: center;
+  padding: 1rem;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  margin-bottom: 1rem;
+  animation: fadeUp 0.4s ease;
+}
+.game-teaser__icon {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+.game-teaser__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+.game-teaser__text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 340px;
+  margin: 0 auto;
 }
 
 /* ===== Scrollbar ===== */

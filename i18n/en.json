@@ -22,30 +22,32 @@
     "travelArrived": "You have arrived at {{location}}.",
     "locationLabel": "Current location",
     "locations": {
-      "oldsterForest": "Oldster Forest",
+      "sentinelBeach": "Sentinel Beach",
       "bougCoton": "Boug-Coton"
     },
+    "teaserTitle": "What happens next?",
+    "teaserText": "This is just a glimpse of the countless encounters that await you in Crownicles. Join the adventure on Discord to find out what happens next!",
     "events": [
       {
-        "text": "As you get ready to enter a forest, a mysterious woman explains there is a shorter path through the west.",
+        "text": "As you pass a lake, you notice a man who seems to be having difficulties on his fishing trip!",
         "choices": [
           {
-            "emoji": "🧭",
-            "label": "Follow the advice of the mysterious woman.",
-            "outcome": "It was indeed a shortcut!",
-            "reward": "+30 min ⏱️"
-          },
-          {
-            "emoji": "🌲",
-            "label": "Cross the forest anyway.",
-            "outcome": "You get lost for several hours in the forest but find your way out unscathed. On your way out, you pick up an item that may be useful to you!",
+            "emoji": "🤝",
+            "label": "Offer your help.",
+            "outcome": "Thanks to you, the man catches a superb fish weighing in at 3 kg! To thank you, he offers you something that could be useful to you...",
             "reward": "+1 🎒 Item"
           },
           {
-            "emoji": "↩️",
-            "label": "Avoid the forest by going the opposite way.",
-            "outcome": "You're not sure why you took a route 10 times longer than you originally planned, but you finally arrived at the right place.",
-            "reward": "-60 min ⏱️"
+            "emoji": "💦",
+            "label": "Push the fisherman into the water!",
+            "outcome": "But why did you do it? Feeling remorseful, you help the poor man and offer him a few coins to make up for it.",
+            "reward": "-20 💰"
+          },
+          {
+            "emoji": "🚶",
+            "label": "Keep going, no time to waste!",
+            "outcome": "You don't have even a minute to lose to help a fisherman! You go your way.",
+            "reward": "+20 min ⏱️"
           }
         ]
       },

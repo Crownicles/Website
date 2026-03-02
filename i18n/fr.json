@@ -22,30 +22,32 @@
     "travelArrived": "Vous êtes arrivé à {{location}}.",
     "locationLabel": "Position actuelle",
     "locations": {
-      "oldsterForest": "Forêt d'Oldster",
+      "sentinelBeach": "Plage Sentinelle",
       "bougCoton": "Boug-Coton"
     },
+    "teaserTitle": "Que se passe-t-il ensuite ?",
+    "teaserText": "Ceci n'est qu'un aperçu des innombrables rencontres qui vous attendent dans Crownicles. Rejoignez l'aventure sur Discord pour découvrir la suite !",
     "events": [
       {
-        "text": "Alors que vous vous apprêtez à rentrer dans une forêt, une inconnue vous explique qu'il existe un chemin plus court en passant par l'ouest.",
+        "text": "Alors que vous passiez près d'un plan d'eau, vous remarquez un homme qui semble en difficulté sur sa partie de pêche !",
         "choices": [
           {
-            "emoji": "🧭",
-            "label": "Suivre les conseils de l'inconnue.",
-            "outcome": "C'était en effet un raccourci !",
-            "reward": "+30 min ⏱️"
-          },
-          {
-            "emoji": "🌲",
-            "label": "Traverser quand même la forêt.",
-            "outcome": "Vous vous perdez pendant plusieurs heures dans la forêt mais finissez par en sortir sans dégâts. En sortant, vous ramassez un objet qui pourra peut-être vous être utile !",
+            "emoji": "🤝",
+            "label": "Proposer son aide.",
+            "outcome": "Grâce à vous, l'homme attrape un superbe poisson de 3 kg ! Pour vous remercier, il vous offre quelque chose qui pourrait vous être utile...",
             "reward": "+1 🎒 Objet"
           },
           {
-            "emoji": "↩️",
-            "label": "Éviter la forêt en partant du côté opposé.",
-            "outcome": "Vous ne savez pas trop pourquoi vous avez pris un chemin 10 fois plus long que celui que vous aviez prévu au départ mais vous avez fini par arriver à bon port.",
-            "reward": "-60 min ⏱️"
+            "emoji": "💦",
+            "label": "Pousser le pêcheur dans l'eau !",
+            "outcome": "Mais pourquoi avoir fait cela ? Pris de remords, vous secourez le pauvre homme et lui offrez quelques pièces pour vous faire pardonner.",
+            "reward": "-20 💰"
+          },
+          {
+            "emoji": "🚶",
+            "label": "Continuer votre route, pas de temps à perdre !",
+            "outcome": "Vous n'avez pas une minute à perdre pour aider un simple pêcheur ! Vous passez votre chemin.",
+            "reward": "+20 min ⏱️"
           }
         ]
       },
