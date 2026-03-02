@@ -1,0 +1,101 @@
+{
+  "meta": {
+    "title": "Crownicles - Un jeu de rôle multijoueur pour Discord",
+    "description": "Rejoignez l'aventure Crownicles sur Discord ! Explorez un monde médiéval, combattez des monstres, accomplissez des quêtes et gagnez la main de la princesse dans ce RPG multijoueur immersif."
+  },
+  "hero": {
+    "title": "Crownicles",
+    "subtitle": "Une aventure Discord",
+    "getStarted": "Commencer",
+    "learnMore": "En savoir plus"
+  },
+  "game": {
+    "welcomeTitle": "Bienvenue, Aventurier !",
+    "welcomeText": "Vous venez d'arriver dans le royaume. Les routes sont longues et pleines de surprises. Utilisez /report pour commencer votre aventure.",
+    "startButton": "Commencer votre voyage",
+    "choicePrompt": "Que ferez-vous ?",
+    "resultTitle": "Résultat",
+    "nextEvent": "Continuer votre voyage",
+    "continueAdventure": "Continuez l'aventure sur Discord !",
+    "joinDiscord": "Rejoindre l'aventure sur Discord",
+    "finalTitle": "Votre aventure vous attend !",
+    "finalText": "Vous avez eu un aperçu de ce que Crownicles a à offrir. Rejoignez des milliers de joueurs sur Discord et écrivez votre propre histoire !",
+    "log": "Journal de {{name}} :",
+    "playerName": "Aventurier",
+    "events": [
+      {
+        "text": "Un arbre est tombé sur le chemin et bloque le passage !",
+        "choices": [
+          {
+            "emoji": "🪓",
+            "label": "Couper l'arbre et continuer.",
+            "outcome": "Abattre cet arbre vous prend une demi-heure, mais vous parvenez à dégager le chemin ! Vous obtenez quelques pièces cachées sous le tronc.",
+            "reward": "+10 💰"
+          },
+          {
+            "emoji": "🚶",
+            "label": "Prendre un autre chemin.",
+            "outcome": "Prendre un autre chemin s'avère être une excellente décision — vous trouvez un raccourci et ne perdez pas de temps !",
+            "reward": "+15 min ⏱️"
+          }
+        ]
+      },
+      {
+        "text": "En passant près d'un lac, vous remarquez un homme qui semble avoir du mal avec sa pêche !",
+        "choices": [
+          {
+            "emoji": "🤝",
+            "label": "Proposer votre aide.",
+            "outcome": "Grâce à vous, l'homme attrape un superbe poisson ! Pour vous remercier, il vous offre quelque chose qui pourrait être utile...",
+            "reward": "+1 🎒 Objet"
+          },
+          {
+            "emoji": "🏃",
+            "label": "Continuer, pas de temps à perdre !",
+            "outcome": "Pas une minute à perdre pour aider un pêcheur ! Vous poursuivez votre route et pressez le pas vers votre destination.",
+            "reward": "+10 min ⏱️"
+          }
+        ]
+      },
+      {
+        "text": "Alors que vous vous apprêtez à entrer dans une forêt, une femme mystérieuse vous explique qu'il existe un chemin plus court par l'ouest.",
+        "choices": [
+          {
+            "emoji": "🧭",
+            "label": "Suivre le conseil de la femme mystérieuse.",
+            "outcome": "C'était effectivement un raccourci ! Vous gagnez beaucoup de temps et arrivez dans un village en avance.",
+            "reward": "+25 ⭐ XP"
+          },
+          {
+            "emoji": "🌲",
+            "label": "Traverser la forêt malgré tout.",
+            "outcome": "Vous vous perdez pendant plusieurs heures dans la forêt, mais vous en sortez indemne. En chemin, vous ramassez un objet qui pourrait être utile !",
+            "reward": "+1 🎒 Objet"
+          }
+        ]
+      },
+      {
+        "text": "Vous tombez sur un marchand ambulant qui semble impatient de conclure une affaire !",
+        "choices": [
+          {
+            "emoji": "💎",
+            "label": "Examiner ses marchandises mystérieuses.",
+            "outcome": "Parmi les bibelots, vous trouvez une amulette rare qui brille faiblement. Le marchand vous la cède à un prix correct.",
+            "reward": "+1 💎 Gemme"
+          },
+          {
+            "emoji": "👋",
+            "label": "Décliner poliment et poursuivre.",
+            "outcome": "Vous saluez le marchand et continuez votre route. Parfois, les meilleures aventures sont celles que l'on choisit de ne pas vivre.",
+            "reward": "+5 ⭐ XP"
+          }
+        ]
+      }
+    ]
+  },
+  "footer": {
+    "copyright": "© {{year}} Crownicles.",
+    "credits": "Remerciements à",
+    "backgroundCredits": "arrière-plan par"
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "meta": {
+    "title": "Crownicles - A Multiplayer Role-Play Game for Discord",
+    "description": "Join the Crownicles adventure on Discord! Explore a medieval world, battle monsters, complete quests, and win the kingdom's princess's hand in this immersive multiplayer RPG."
+  },
+  "hero": {
+    "title": "Crownicles",
+    "subtitle": "A Discord Adventure",
+    "getStarted": "Get Started",
+    "learnMore": "Learn More"
+  },
+  "game": {
+    "welcomeTitle": "Welcome, Adventurer!",
+    "welcomeText": "You have just arrived in the kingdom. The roads are long and full of surprises. Use /report to begin your adventure.",
+    "startButton": "Begin your journey",
+    "choicePrompt": "What will you do?",
+    "resultTitle": "Result",
+    "nextEvent": "Continue your journey",
+    "continueAdventure": "Continue the adventure on Discord!",
+    "joinDiscord": "Join the adventure on Discord",
+    "finalTitle": "Your adventure awaits!",
+    "finalText": "You've had a taste of what Crownicles has to offer. Join thousands of players on Discord and write your own story!",
+    "log": "{{name}}'s log:",
+    "playerName": "Adventurer",
+    "events": [
+      {
+        "text": "A tree has fallen on the path and is blocking the way!",
+        "choices": [
+          {
+            "emoji": "🪓",
+            "label": "Fell the tree and continue.",
+            "outcome": "Felling this tree took half an hour, but you manage to clear the path! You earn a few coins that were hidden under the trunk.",
+            "reward": "+10 💰"
+          },
+          {
+            "emoji": "🚶",
+            "label": "Go another way.",
+            "outcome": "Going another way seemed to be a great decision — you found a shortcut and didn't waste any time!",
+            "reward": "+15 min ⏱️"
+          }
+        ]
+      },
+      {
+        "text": "As you pass a lake, you notice a man who seems to be having difficulties on his fishing trip!",
+        "choices": [
+          {
+            "emoji": "🤝",
+            "label": "Offer your help.",
+            "outcome": "Thanks to you, the man catches a superb fish! To thank you, he offers you something that could be useful...",
+            "reward": "+1 🎒 Item"
+          },
+          {
+            "emoji": "🏃",
+            "label": "Keep going, no time to waste!",
+            "outcome": "You don't have even a minute to lose to help a fisherman! You go your way and press on towards your destination.",
+            "reward": "+10 min ⏱️"
+          }
+        ]
+      },
+      {
+        "text": "As you get ready to enter a forest, a mysterious woman explains there is a shorter path through the west.",
+        "choices": [
+          {
+            "emoji": "🧭",
+            "label": "Follow the advice of the mysterious woman.",
+            "outcome": "It was indeed a shortcut! You saved a lot of time and arrive at a village ahead of schedule.",
+            "reward": "+25 ⭐ XP"
+          },
+          {
+            "emoji": "🌲",
+            "label": "Cross the forest anyway.",
+            "outcome": "You get lost for several hours in the forest but find your way out unscathed. On your way out, you pick up an item that may be useful!",
+            "reward": "+1 🎒 Item"
+          }
+        ]
+      },
+      {
+        "text": "You stumble upon a traveling merchant who seems eager to make a deal!",
+        "choices": [
+          {
+            "emoji": "💎",
+            "label": "Browse his mysterious wares.",
+            "outcome": "Among the trinkets, you find a rare amulet that glows faintly. The merchant lets you have it for a fair price.",
+            "reward": "+1 💎 Gem"
+          },
+          {
+            "emoji": "👋",
+            "label": "Politely decline and move on.",
+            "outcome": "You wave goodbye and continue on your way. Sometimes the best adventures are the ones you choose to skip.",
+            "reward": "+5 ⭐ XP"
+          }
+        ]
+      }
+    ]
+  },
+  "footer": {
+    "copyright": "© {{year}} Crownicles.",
+    "credits": "Special thanks to",
+    "backgroundCredits": "background by"
+  }
+}
