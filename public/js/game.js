@@ -1,5 +1,5 @@
 /**
- * Game simulation – card-based UI with map & travel animation.
+ * Game simulation – fullscreen card-based UI with map & travel animation.
  */
 
 import { t, getLocale } from './i18n.js';
@@ -13,75 +13,74 @@ const LOCATIONS = [
   { id: 6, key: 'bougCoton',     x: 13.9, y: 35.3 },   // Boug-Coton
 ];
 
-let currentStep = 0; // 0=welcome, 1=event0, 2=travel, 3=event1, 4=final
+let currentStep = 0;
 let events = [];
-let overlay, container;
+let screen, content;
 
-/* ---- Overlay lifecycle ---- */
-function createOverlay() {
-  overlay = document.createElement('div');
-  overlay.className = 'game-overlay';
-  overlay.id = 'game-overlay';
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) closeGame();
-  });
-
-  container = document.createElement('div');
-  container.className = 'game-container';
-  container.setAttribute('role', 'dialog');
-  container.setAttribute('aria-modal', 'true');
-
-  overlay.appendChild(container);
-  document.body.appendChild(overlay);
-}
-
+/* ---- Fullscreen lifecycle ---- */
 function openGame() {
-  if (!overlay) createOverlay();
+  screen = document.getElementById('game-screen');
+  content = document.getElementById('game-content');
   events = t('game.events');
   currentStep = 0;
-  overlay.classList.add('game-overlay--active');
+  screen.classList.add('game-screen--active');
   document.body.style.overflow = 'hidden';
   renderWelcome();
 }
 
 function closeGame() {
-  if (overlay) {
-    overlay.classList.remove('game-overlay--active');
+  if (screen) {
+    screen.classList.remove('game-screen--active');
     document.body.style.overflow = '';
   }
 }
 
-/* ---- Progress bar: welcome → event 1 → travel → event 2 → final ---- */
-function progressHTML() {
-  const steps = 5;
-  return `<div class="game-progress">${Array.from({ length: steps }, (_, i) => {
-    let cls = 'game-progress__dot';
-    if (i < currentStep) cls += ' game-progress__dot--done';
-    else if (i === currentStep) cls += ' game-progress__dot--active';
-    return `<div class="${cls}"></div>`;
-  }).join('')}</div>`;
-}
-
-/* ---- Map widget with CSS marker ---- */
+/* ---- Map widget with CSS marker (only for travel) ---- */
 function mapHTML(locIndex) {
   const loc = LOCATIONS[locIndex];
   const label = t(`game.locations.${loc.key}`);
   return `
     <div class="game-map">
       <div class="game-map__label">📍 ${t('game.locationLabel')}: <strong>${label}</strong></div>
-      <div class="game-map__container">
+      <div class="game-map__container game-map__container--clickable" data-loc-x="${loc.x}" data-loc-y="${loc.y}">
         <img class="game-map__img" src="./public/images/map.webp" alt="Map – ${label}">
         <div class="game-map__marker" style="left:${loc.x}%;top:${loc.y}%"></div>
       </div>
     </div>`;
 }
 
-/* ---- Step: Welcome ---- */
+/* ---- Map lightbox ---- */
+function bindMapClick() {
+  content.querySelectorAll('.game-map__container--clickable').forEach(el => {
+    el.addEventListener('click', () => {
+      const x = el.dataset.locX;
+      const y = el.dataset.locY;
+      openMapLightbox(x, y);
+    });
+  });
+}
+
+function openMapLightbox(x, y) {
+  const lightbox = document.getElementById('map-lightbox');
+  const marker = document.getElementById('map-lightbox-marker');
+  if (x && y) {
+    marker.style.left = `${x}%`;
+    marker.style.top = `${y}%`;
+    marker.style.display = 'block';
+  } else {
+    marker.style.display = 'none';
+  }
+  lightbox.classList.add('map-lightbox--active');
+}
+
+function closeMapLightbox() {
+  document.getElementById('map-lightbox')?.classList.remove('map-lightbox--active');
+}
+
+/* ---- Step: Welcome (no map) ---- */
 function renderWelcome() {
   currentStep = 0;
-  container.innerHTML = `
-    ${progressHTML()}
-    ${mapHTML(0)}
+  content.innerHTML = `
     <div class="game-card">
       <div class="game-card__icon">👑</div>
       <div class="game-card__title">${t('game.welcomeTitle')}</div>
@@ -91,18 +90,16 @@ function renderWelcome() {
       <button class="btn btn--primary btn--small" id="game-start">${t('game.startButton')} →</button>
     </div>
   `;
-  container.querySelector('#game-start').addEventListener('click', () => renderEvent(0));
+  content.querySelector('#game-start').addEventListener('click', () => renderEvent(0));
 }
 
-/* ---- Step: Event ---- */
+/* ---- Step: Event (no map – stories don't show map) ---- */
 function renderEvent(index) {
   currentStep = index === 0 ? 1 : 3;
   const ev = events[index];
   if (!ev) { renderFinal(); return; }
 
-  container.innerHTML = `
-    ${progressHTML()}
-    ${mapHTML(index)}
+  content.innerHTML = `
     <div class="game-card">
       <div class="game-card__text">${ev.text}</div>
     </div>
@@ -116,7 +113,7 @@ function renderEvent(index) {
     </div>
   `;
 
-  container.querySelectorAll('.game-choice').forEach(btn => {
+  content.querySelectorAll('.game-choice').forEach(btn => {
     btn.addEventListener('click', () => handleChoice(index, +btn.dataset.i));
   });
 }
@@ -126,7 +123,7 @@ function handleChoice(evIdx, choiceIdx) {
   const choice = events[evIdx].choices[choiceIdx];
   const isLast = evIdx >= events.length - 1;
 
-  container.querySelectorAll('.game-choice').forEach((btn, i) => {
+  content.querySelectorAll('.game-choice').forEach((btn, i) => {
     btn.classList.add('game-choice--disabled');
     if (i === choiceIdx) btn.classList.add('game-choice--selected');
   });
@@ -134,11 +131,10 @@ function handleChoice(evIdx, choiceIdx) {
   const result = document.createElement('div');
   result.className = 'game-result';
   result.innerHTML = `<div class="typing-indicator"><span></span><span></span><span></span></div>`;
-  container.querySelector('#choices').after(result);
+  content.querySelector('#choices').after(result);
 
   setTimeout(() => {
     if (isLast) {
-      /* For the last event, tease the result and show Discord CTA instead */
       result.innerHTML = `
         <div class="game-teaser">
           <div class="game-teaser__icon">✨</div>
@@ -159,7 +155,6 @@ function handleChoice(evIdx, choiceIdx) {
       `;
       result.after(actions);
     } else {
-      /* Normal event: show outcome + reward + continue button */
       result.innerHTML = `
         <div class="game-result__outcome">${choice.outcome}</div>
         <div class="game-result__reward">${choice.reward}</div>
@@ -183,7 +178,7 @@ function handleChoice(evIdx, choiceIdx) {
   }, TYPING_DELAY);
 }
 
-/* ---- Step: Travel animation (single map, moving marker) ---- */
+/* ---- Step: Travel animation (map visible here, clickable for fullscreen) ---- */
 function renderTravel() {
   currentStep = 2;
   const from = LOCATIONS[0];
@@ -191,15 +186,14 @@ function renderTravel() {
   const fromName = t(`game.locations.${from.key}`);
   const toName = t(`game.locations.${to.key}`);
 
-  container.innerHTML = `
-    ${progressHTML()}
+  content.innerHTML = `
     <div class="game-travel">
       <div class="game-travel__header">
         <span class="game-travel__icon">🗺️</span>
         <span class="game-travel__title">${t('game.travelTitle')}</span>
       </div>
       <div class="game-travel__text">${t('game.travelText', { from: fromName, to: toName })}</div>
-      <div class="game-map__container game-travel__map-wrapper">
+      <div class="game-map__container game-map__container--clickable game-travel__map-wrapper" data-loc-x="${to.x}" data-loc-y="${to.y}">
         <img class="game-map__img" src="./public/images/map.webp" alt="Map">
         <div class="game-map__marker game-map__marker--travel" id="travel-marker"
              style="left:${from.x}%;top:${from.y}%"></div>
@@ -216,17 +210,17 @@ function renderTravel() {
     </div>
   `;
 
-  const fill = container.querySelector('#travel-fill');
-  const marker = container.querySelector('#travel-marker');
+  bindMapClick();
 
-  // Start animations
+  const fill = content.querySelector('#travel-fill');
+  const marker = content.querySelector('#travel-marker');
+
   requestAnimationFrame(() => {
     fill.style.width = '100%';
     marker.style.left = `${to.x}%`;
     marker.style.top = `${to.y}%`;
   });
 
-  // Show arrival after animation completes
   setTimeout(() => {
     const arrived = document.createElement('div');
     arrived.className = 'game-travel__arrived';
@@ -234,9 +228,9 @@ function renderTravel() {
       <div class="game-travel__arrived-text">📍 ${t('game.travelArrived', { location: toName })}</div>
       <button class="btn btn--primary btn--small" id="travel-continue">${t('game.nextEvent')} →</button>
     `;
-    container.querySelector('.game-travel').appendChild(arrived);
+    content.querySelector('.game-travel').appendChild(arrived);
 
-    container.querySelector('#travel-continue').addEventListener('click', () => {
+    content.querySelector('#travel-continue').addEventListener('click', () => {
       renderEvent(1);
     });
   }, 3200);
@@ -245,8 +239,7 @@ function renderTravel() {
 /* ---- Step: Final CTA ---- */
 function renderFinal() {
   currentStep = 4;
-  container.innerHTML = `
-    ${progressHTML()}
+  content.innerHTML = `
     <div class="game-final">
       <div class="game-final__icon">👑</div>
       <div class="game-final__title">${t('game.finalTitle')}</div>
@@ -259,6 +252,21 @@ function renderFinal() {
       </a>
     </div>
   `;
+}
+
+/* ---- Init lightbox close handlers ---- */
+function initLightbox() {
+  document.getElementById('map-lightbox-close')?.addEventListener('click', closeMapLightbox);
+  document.getElementById('map-lightbox')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeMapLightbox();
+  });
+}
+
+// Run once on import
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initLightbox);
+} else {
+  initLightbox();
 }
 
 export { openGame, closeGame };

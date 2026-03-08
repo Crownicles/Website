@@ -1,4 +1,8 @@
 {
+  "nav": {
+    "guide": "Guide",
+    "history": "Historique"
+  },
   "meta": {
     "title": "Crownicles - Un jeu de rôle multijoueur pour Discord",
     "description": "Rejoignez l'aventure Crownicles sur Discord ! Explorez un monde médiéval, combattez des monstres, accomplissez des quêtes et gagnez la main de la princesse dans ce RPG multijoueur immersif."

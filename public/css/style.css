@@ -51,68 +51,109 @@ button {
   background: none;
 }
 
+/* ===== Nav ===== */
+.nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  padding: 1rem 5%;
+  background: linear-gradient(rgba(0,0,0,0.5), transparent);
+}
+
+.nav__logo {
+  margin-right: auto;
+}
+
+.nav__logo img {
+  height: 40px;
+  width: auto;
+}
+
+.nav__links {
+  list-style: none;
+  display: flex;
+  gap: 0;
+}
+
+.nav__links li a {
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.5rem 1.25rem;
+  transition: opacity var(--transition);
+}
+
+.nav__links li a:hover {
+  opacity: 0.7;
+}
+
 /* ===== Hero ===== */
 .hero {
   flex: 1;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4rem 2rem;
+  text-align: center;
   position: relative;
+  background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.5)),
+              url('../images/background.webp') center / cover no-repeat;
+  background-color: #7289da;
 }
 
-.hero__inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  max-width: 1100px;
-  width: 100%;
-  align-items: center;
-}
-
-.hero__text {
+.hero__content {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
+  padding: 2rem;
+  z-index: 1;
 }
 
 .hero__logo {
-  width: 180px;
+  width: 220px;
   margin-bottom: 0.5rem;
 }
 
 .hero__title {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
   font-weight: 900;
   letter-spacing: -0.03em;
   line-height: 1.05;
   color: #fff;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
 }
 
 .hero__subtitle {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  color: var(--text-muted);
-  font-weight: 400;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  color: rgba(255,255,255,0.95);
+  font-weight: 500;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
 }
 
 .hero__actions {
   display: flex;
-  gap: 0.75rem;
-  margin-top: 1rem;
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
 
-/* ===== Illustration ===== */
-.hero__visual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* ===== Hero Wave ===== */
+.hero__wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  z-index: 1;
 }
 
-.hero__illustration {
+.hero__wave svg {
+  display: block;
   width: 100%;
-  max-width: 480px;
-  border-radius: var(--radius);
-  box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+  height: 120px;
 }
 
 /* ===== Buttons ===== */
@@ -140,14 +181,15 @@ button {
 }
 
 .btn--ghost {
-  background: transparent;
-  color: var(--text-muted);
-  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.3);
+  backdrop-filter: blur(4px);
 }
 .btn--ghost:hover {
-  background: var(--bg-hover);
-  color: var(--text);
-  border-color: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  border-color: rgba(255,255,255,0.4);
 }
 
 .btn--discord {
@@ -165,6 +207,11 @@ button {
   padding: 0.6rem 1.25rem;
 }
 
+.btn--large {
+  font-size: 1.05rem;
+  padding: 0.9rem 2.25rem;
+}
+
 .btn__icon {
   width: 18px;
   height: 18px;
@@ -176,19 +223,20 @@ button {
   top: 1.25rem;
   right: 1.25rem;
   z-index: 100;
-  background: var(--bg-card);
-  color: var(--text-muted);
+  background: rgba(0,0,0,0.4);
+  color: rgba(255,255,255,0.8);
   font-size: 0.75rem;
   font-weight: 700;
   padding: 0.4rem 0.7rem;
   border-radius: 6px;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255,255,255,0.15);
   letter-spacing: 0.05em;
   transition: all var(--transition);
+  backdrop-filter: blur(4px);
 }
 .lang-toggle:hover {
-  background: var(--bg-hover);
-  color: var(--text);
+  background: rgba(0,0,0,0.6);
+  color: #fff;
 }
 
 /* ===== Footer ===== */
@@ -206,64 +254,45 @@ button {
   text-decoration: underline;
 }
 
-/* ===== Game Overlay ===== */
-.game-overlay {
+/* ===== Game Fullscreen ===== */
+.game-screen {
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: linear-gradient(160deg, #1a1c2e 0%, #141517 40%, #0d1117 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 2rem;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s ease;
 }
-.game-overlay--active {
+.game-screen--active {
   opacity: 1;
   pointer-events: all;
 }
 
-/* ===== Game Container ===== */
-.game-container {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+.game-screen__close {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  font-size: 2rem;
+  color: var(--text-muted);
+  z-index: 10;
+  transition: color var(--transition);
+  line-height: 1;
+}
+.game-screen__close:hover {
+  color: #fff;
+}
+
+.game-screen__content {
   width: 100%;
-  max-width: 520px;
-  max-height: 85vh;
+  max-width: 560px;
+  max-height: 90vh;
   overflow-y: auto;
-  padding: 2rem;
-  animation: modalIn 0.3s ease;
-}
-
-@keyframes modalIn {
-  from { transform: scale(0.95) translateY(10px); opacity: 0; }
-  to   { transform: scale(1) translateY(0); opacity: 1; }
-}
-
-/* ===== Game Progress ===== */
-.game-progress {
-  display: flex;
-  gap: 6px;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-}
-.game-progress__dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.1);
-  transition: background var(--transition);
-}
-.game-progress__dot--active {
-  background: var(--accent);
-}
-.game-progress__dot--done {
-  background: var(--success);
+  animation: fadeUp 0.4s ease;
 }
 
 /* ===== Game Card (event text) ===== */
@@ -547,22 +576,83 @@ button {
 }
 
 /* ===== Scrollbar ===== */
-.game-container::-webkit-scrollbar { width: 4px; }
-.game-container::-webkit-scrollbar-track { background: transparent; }
-.game-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+.game-screen__content::-webkit-scrollbar { width: 4px; }
+.game-screen__content::-webkit-scrollbar-track { background: transparent; }
+.game-screen__content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+/* ===== Map clickable hint ===== */
+.game-map__container--clickable {
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.game-map__container--clickable:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 24px rgba(232,168,56,0.2);
+}
+
+/* ===== Map Lightbox ===== */
+.map-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.map-lightbox--active {
+  opacity: 1;
+  pointer-events: all;
+}
+.map-lightbox__close {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  font-size: 2.5rem;
+  color: rgba(255,255,255,0.7);
+  z-index: 10;
+  transition: color var(--transition);
+  line-height: 1;
+}
+.map-lightbox__close:hover {
+  color: #fff;
+}
+.map-lightbox__img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: var(--radius);
+  object-fit: contain;
+}
+.map-lightbox__marker {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #e74c3c;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.4), 0 2px 12px rgba(0,0,0,0.7);
+  transform: translate(-50%, -50%);
+  animation: markerPulse 2s ease-in-out infinite;
+  display: none;
+}
+.map-lightbox--active .map-lightbox__marker {
+  display: block;
+}
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
+  .nav__links {
+    display: none;
+  }
   .hero {
+    min-height: 100vh;
     padding: 6rem 1.5rem 3rem;
   }
-  .hero__inner {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-    text-align: center;
-  }
-  .hero__text {
-    align-items: center;
+  .hero__logo {
+    width: 160px;
   }
   .hero__actions {
     flex-direction: column;
@@ -570,13 +660,10 @@ button {
     width: 100%;
     max-width: 280px;
   }
-  .hero__visual {
-    order: -1;
+  .game-screen {
+    padding: 1rem;
   }
-  .hero__illustration {
-    max-width: 320px;
-  }
-  .game-container {
-    padding: 1.5rem;
+  .game-screen__content {
+    max-height: 95vh;
   }
 }

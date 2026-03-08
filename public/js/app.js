@@ -5,8 +5,6 @@
 import { initI18n, t, getLocale, getNextLocale, loadTranslations } from './i18n.js';
 import { openGame, closeGame } from './game.js';
 
-const GUIDE_URL = 'https://guide.crownicles.com';
-
 async function init() {
   await initI18n();
   render();
@@ -41,9 +39,8 @@ function render() {
 
 function bindEvents() {
   document.getElementById('btn-get-started')?.addEventListener('click', () => openGame());
-  document.getElementById('btn-learn-more')?.addEventListener('click', () => {
-    window.open(GUIDE_URL, '_blank', 'noopener');
-  });
+
+  document.getElementById('game-close')?.addEventListener('click', () => closeGame());
 
   document.getElementById('lang-toggle')?.addEventListener('click', async () => {
     await loadTranslations(getNextLocale());
@@ -52,8 +49,8 @@ function bindEvents() {
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      const ov = document.getElementById('game-overlay');
-      if (ov?.classList.contains('game-overlay--active')) closeGame();
+      const screen = document.getElementById('game-screen');
+      if (screen?.classList.contains('game-screen--active')) closeGame();
     }
   });
 }

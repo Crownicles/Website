@@ -26,29 +26,58 @@
   <link rel="stylesheet" href="./public/css/style.css">
 </head>
 <body>
+  <!-- ========== NAV ========== -->
+  <nav class="nav">
+    <a class="nav__logo" href="/">
+      <img src="./public/images/banner.webp" alt="Crownicles">
+    </a>
+    <ul class="nav__links">
+      <li><a href="https://guide.crownicles.com" target="_blank" rel="noopener" data-i18n="nav.guide">Guide</a></li>
+      <li><a href="https://github.com/Crownicles/Crownicles" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="https://history.crownicles.com" target="_blank" rel="noopener" data-i18n="nav.history">History</a></li>
+      <li><a href="https://discord.gg/WwgBfSg" target="_blank" rel="noopener">Discord</a></li>
+    </ul>
+    <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">EN</button>
+  </nav>
+
   <!-- ========== HERO ========== -->
   <section class="hero">
-    <div class="hero__inner">
-      <div class="hero__text">
-        <img src="./public/images/banner.webp" alt="Crownicles logo" class="hero__logo">
-        <h1 class="hero__title" data-i18n="hero.title">Crownicles</h1>
-        <p class="hero__subtitle" data-i18n="hero.subtitle">A Discord Adventure</p>
-        <div class="hero__actions">
-          <button class="btn btn--primary" id="btn-get-started" data-i18n="hero.getStarted">Get Started</button>
-          <button class="btn btn--ghost" id="btn-learn-more" data-i18n="hero.learnMore">Learn More</button>
-        </div>
-      </div>
-      <div class="hero__visual">
-        <img src="./public/images/background.webp" alt="Crownicles throne room" class="hero__illustration">
+    <div class="hero__content">
+      <h1 class="hero__title" data-i18n="hero.title">Crownicles</h1>
+      <p class="hero__subtitle" data-i18n="hero.subtitle">A Discord Adventure</p>
+      <div class="hero__actions">
+        <button class="btn btn--primary btn--large" id="btn-get-started" data-i18n="hero.getStarted">Get Started</button>
+        <a href="https://guide.crownicles.com" target="_blank" rel="noopener" class="btn btn--ghost btn--large" data-i18n="hero.learnMore">Learn More</a>
       </div>
     </div>
-
-    <!-- Language toggle -->
-    <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">EN</button>
+    <div class="hero__wave">
+      <svg viewBox="0 0 1440 150" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="var(--bg)" d="M0 67 C 273,183 822,0 1440,106 V 359 H 0 V 67 Z">
+          <animate repeatCount="indefinite" attributeName="d" dur="35s" values="
+            M0 67 C 473,283 822,0 1440,116 V 359 H 0 V 67 Z;
+            M0 67 C 473,0 1222,283 1440,67 V 359 H 0 V 67 Z;
+            M0 67 C 973,260 1722,0 1440,120 V 359 H 0 V 67 Z;
+            M0 67 C 473,283 822,0 1440,116 V 359 H 0 V 67 Z"/>
+        </path>
+      </svg>
+    </div>
   </section>
 
   <!-- ========== FOOTER ========== -->
   <footer class="footer" id="footer-text"></footer>
+
+  <!-- ========== GAME FULLSCREEN ========== -->
+  <div class="game-screen" id="game-screen">
+    <button class="game-screen__close" id="game-close" aria-label="Close">&times;</button>
+    <div class="game-screen__content" id="game-content"></div>
+  </div>
+
+  <!-- ========== MAP LIGHTBOX ========== -->
+  <div class="map-lightbox" id="map-lightbox">
+    <button class="map-lightbox__close" id="map-lightbox-close" aria-label="Close">&times;</button>
+    <img class="map-lightbox__img" src="./public/images/map.webp" alt="Map">
+    <div class="map-lightbox__marker" id="map-lightbox-marker"></div>
+  </div>
 
   <!-- ========== SCRIPTS ========== -->
   <script type="module" src="./public/js/app.js"></script>
