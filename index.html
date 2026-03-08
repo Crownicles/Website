@@ -36,6 +36,7 @@
       <li><a href="https://github.com/Crownicles/Crownicles" target="_blank" rel="noopener">GitHub</a></li>
       <li><a href="https://history.crownicles.com" target="_blank" rel="noopener" data-i18n="nav.history">History</a></li>
       <li><a href="https://discord.gg/WwgBfSg" target="_blank" rel="noopener">Discord</a></li>
+      <li><a href="/donate/" class="nav__donate" data-i18n="footer.donate">Donate</a></li>
     </ul>
     <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">EN</button>
   </nav>
@@ -75,8 +76,10 @@
   <!-- ========== MAP LIGHTBOX ========== -->
   <div class="map-lightbox" id="map-lightbox">
     <button class="map-lightbox__close" id="map-lightbox-close" aria-label="Close">&times;</button>
-    <img class="map-lightbox__img" src="./public/images/map.webp" alt="Map">
-    <div class="map-lightbox__marker" id="map-lightbox-marker"></div>
+    <div class="map-lightbox__wrapper">
+      <img class="map-lightbox__img" src="./public/images/map.webp" alt="Map">
+      <div class="map-lightbox__marker" id="map-lightbox-marker"></div>
+    </div>
   </div>
 
   <!-- ========== SCRIPTS ========== -->

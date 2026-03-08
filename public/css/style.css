@@ -91,6 +91,21 @@ button {
   opacity: 0.7;
 }
 
+.nav__donate {
+  background: var(--accent);
+  color: #111 !important;
+  padding: 0.4rem 1rem !important;
+  border-radius: 6px;
+  font-weight: 600 !important;
+  transition: background var(--transition), transform var(--transition) !important;
+  opacity: 1 !important;
+}
+.nav__donate:hover {
+  background: var(--accent-hover);
+  opacity: 1 !important;
+  transform: translateY(-1px);
+}
+
 /* ===== Hero ===== */
 .hero {
   flex: 1;
@@ -619,6 +634,11 @@ button {
 }
 .map-lightbox__close:hover {
   color: #fff;
+}
+.map-lightbox__wrapper {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
 }
 .map-lightbox__img {
   max-width: 90vw;

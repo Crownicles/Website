@@ -83,6 +83,9 @@
   "footer": {
     "copyright": "© {{year}} Crownicles.",
     "credits": "Remerciements à",
-    "backgroundCredits": "arrière-plan par"
+    "backgroundCredits": "arrière-plan par",
+    "donate": "Faire un don",
+    "privacy": "Politique de confidentialité",
+    "tos": "Conditions d'utilisation"
   }
 }

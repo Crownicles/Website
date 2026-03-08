@@ -33,7 +33,11 @@ function render() {
   // Footer
   const footer = document.getElementById('footer-text');
   if (footer) {
-    footer.innerHTML = `${t('footer.copyright', { year: new Date().getFullYear() })} · ${t('footer.credits')} <a href="https://behance.net/mw3y" target="_blank" rel="noopener">MΛX</a> · ${t('footer.backgroundCredits')} <a href="https://www.freepik.com/free-vector/medieval-castle-interior-flat-cartoon-composition-with-king-throne-armed-knight-coat-arms-guard_6845842.htm" target="_blank" rel="noopener">macrovector</a>`;
+    footer.innerHTML = `
+      ${t('footer.copyright', { year: new Date().getFullYear() })} · ${t('footer.credits')} <a href="https://behance.net/mw3y" target="_blank" rel="noopener">MΛX</a> · ${t('footer.backgroundCredits')} <a href="https://www.freepik.com/free-vector/medieval-castle-interior-flat-cartoon-composition-with-king-throne-armed-knight-coat-arms-guard_6845842.htm" target="_blank" rel="noopener">macrovector</a>
+      <br>
+      <a href="/donate/">${t('footer.donate')}</a> · <a href="/privacy/">${t('footer.privacy')}</a> · <a href="/tos/">${t('footer.tos')}</a>
+    `;
   }
 }
 
