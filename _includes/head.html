@@ -50,22 +50,56 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "VideoGame",
-  "name": "Crownicles",
-  "description": {{ meta_description | jsonify }},
-  "image": "{{ og_image }}",
-  "url": "{{ site.url }}",
-  "applicationCategory": "GameApplication",
-  "genre": ["Role-playing game", "Text adventure"],
-  "gamePlatform": ["Discord"],
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-  "sameAs": ["https://github.com/Crownicles/Crownicles"]
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "{{ site.url }}/#organization",
+      "name": "Crownicles",
+      "url": "{{ site.url }}/",
+      "logo": "{{ '/public/ressources/app/icon-512.png' | absolute_url }}",
+      "foundingDate": "2018-12-21",
+      "sameAs": [
+        "https://github.com/Crownicles",
+        "https://discord.com/invite/crownicles",
+        "https://guide.crownicles.com/",
+        "https://history.crownicles.com/",
+        "https://top.gg/bot/448110812801007618",
+        "https://x.com/{{ site.twitter_username }}"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ site.url }}/#website",
+      "name": "Crownicles",
+      "url": "{{ site.url }}/",
+      "inLanguage": ["fr", "en"],
+      "publisher": { "@id": "{{ site.url }}/#organization" }
+    },
+    {
+      "@type": "VideoGame",
+      "@id": "{{ site.url }}/#game",
+      "name": "Crownicles",
+      "description": {{ meta_description | jsonify }},
+      "image": "{{ og_image }}",
+      "url": "{{ site.url }}/",
+      "applicationCategory": "GameApplication",
+      "genre": ["Role-playing game", "Text adventure"],
+      "gamePlatform": ["Discord"],
+      "inLanguage": ["fr", "en"],
+      "isAccessibleForFree": true,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+      "author": { "@id": "{{ site.url }}/#organization" },
+      "sameAs": ["https://github.com/Crownicles/Crownicles"]
+    }
+  ]
 }
 </script>
 
-<link rel="icon" href="{{ '/public/ressources/favicon.ico' | relative_url }}" sizes="any">
-<link rel="icon" type="image/png" href="{{ '/public/ressources/app/icon-256.png' | relative_url }}">
-<link rel="apple-touch-icon" href="{{ '/public/ressources/app/icon-256.png' | relative_url }}">
+<link rel="icon" href="{{ '/favicon.ico' | relative_url }}" sizes="16x16 32x32 48x48 64x64">
+<link rel="icon" type="image/png" sizes="48x48" href="{{ '/public/ressources/app/icon-48.png' | relative_url }}">
+<link rel="icon" type="image/png" sizes="192x192" href="{{ '/public/ressources/app/icon-192.png' | relative_url }}">
+<link rel="apple-touch-icon" href="{{ '/apple-touch-icon.png' | relative_url }}">
+<link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
 
 <link rel="preload" href="{{ '/public/fonts/inter-latin-wght-normal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 {%- if page.hero %}

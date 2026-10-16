@@ -2,7 +2,7 @@
 {%- assign t = site.data.i18n[lang] -%}
 {%- assign ev = site.data.demo_event -%}
 <section class="banner">
-  <img class="banner__wordmark" src="{{ '/public/ressources/banner-min.webp' | relative_url }}" alt="Crownicles" width="1200" height="152">
+  <h1 class="banner__title"><img class="banner__wordmark" src="{{ '/public/ressources/banner-min.webp' | relative_url }}" alt="Crownicles" width="1200" height="152"></h1>
   <svg class="banner__wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
     <path opacity="0.45" d="M0 58 C 360 18, 760 104, 1440 46 V 120 H 0 Z">
       <animate attributeName="d" dur="28s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
@@ -17,7 +17,7 @@
 
 <section class="intro">
   <div class="wrap">
-    <h1 class="title">{{ t.hero.title }}</h1>
+    <p class="title">{{ t.hero.title }}</p>
     {% include stores.html %}
   </div>
 </section>

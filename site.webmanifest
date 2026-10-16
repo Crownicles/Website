@@ -1,0 +1,13 @@
+{
+  "name": "Crownicles",
+  "short_name": "Crownicles",
+  "description": "Medieval text RPG on Discord and soon on mobile.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#F4F4F5",
+  "theme_color": "#B95E4B",
+  "icons": [
+    { "src": "/public/ressources/app/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/public/ressources/app/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

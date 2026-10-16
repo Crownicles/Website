@@ -307,6 +307,11 @@ a {
 	}
 }
 
+.banner__title {
+	display: contents;
+	margin: 0;
+}
+
 .banner__wordmark {
 	width: min(520px, 86%);
 	height: auto;
