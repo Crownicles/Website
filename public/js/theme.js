@@ -65,8 +65,8 @@
 		}).catch(() => {});
 	}
 
-	// Easter egg: switching the theme five times in a row plays a video over the page.
-	const EASTER_EGG_CLICKS = 5;
+	// Easter egg: five day/night round trips in a row (ten switches) play a video in a corner.
+	const EASTER_EGG_ROUND_TRIPS = 5;
 	const EASTER_EGG_GAP_MS = 1500;
 	const EASTER_EGG_DURATION_MS = 6000;
 	const EASTER_EGG_FADE_MS = 400;
@@ -99,7 +99,7 @@
 		const now = performance.now();
 		streak = now - lastClick <= EASTER_EGG_GAP_MS ? streak + 1 : 1;
 		lastClick = now;
-		if (streak >= EASTER_EGG_CLICKS) {
+		if (streak >= EASTER_EGG_ROUND_TRIPS * 2) {
 			streak = 0;
 			showEasterEgg();
 		}
