@@ -19,7 +19,8 @@
       {%- for tier in site.data.donate.tiers %}
       {%- assign i = forloop.index0 %}
       <article class="tier{% if tier.popular %} tier--popular{% endif %}">
-        <div class="tier__art"><img src="{{ '/public/ressources/art/' | append: tier.art | append: '.webp' | relative_url }}" alt="" loading="lazy" decoding="async"></div>
+        {%- assign art_size = site.data.art[tier.art] %}
+        <div class="tier__art"><img src="{{ '/public/ressources/art/' | append: tier.art | append: '.webp' | relative_url }}" alt="" width="{{ art_size[0] }}" height="{{ art_size[1] }}" loading="lazy" decoding="async"></div>
         <div class="tier__head">
           <h2>{{ d.names[i] }}</h2>
           <p class="tier__price">{{ tier.price }} €</p>

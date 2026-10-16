@@ -1,0 +1,9 @@
+# Natural size of each illustration in public/ressources/art, so the page reserves their room.
+goodies: [500,500]
+guard: [219,520]
+herald: [305,520]
+king-throne: [443,520]
+king: [230,520]
+lady: [272,520]
+soldier: [301,520]
+squire: [206,520]

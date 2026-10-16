@@ -143,7 +143,7 @@
 				<div class="standing__emblem">${emoji("😃")}</div>
 				<div>
 					<p class="standing__caption" data-caption>${escapeHtml(ui.travel_caption)}</p>
-					<h3 class="standing__title" data-title>${escapeHtml(ui.travel_title)}</h3>
+					<p class="standing__title" data-title>${escapeHtml(ui.travel_title)}</p>
 					<p class="standing__subtitle" data-subtitle>${escapeHtml(ui.travel_subtitle)}</p>
 				</div>
 			</div>
@@ -222,7 +222,7 @@
 
 		show(`
 			${journal("🦀", escapeHtml(texts.intro))}
-			<h3 class="section-header">${escapeHtml(ui.your_action)}</h3>
+			<p class="section-header">${escapeHtml(ui.your_action)}</p>
 			<div class="choices">${choices}</div>
 		`);
 

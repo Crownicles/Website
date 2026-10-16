@@ -280,7 +280,10 @@ a {
 
 /* ---------- The original banner ---------- */
 
+/* The illustration is sized to the screen: a phone never downloads the 6000 px original. */
 .banner {
+	--banner-image: url(../ressources/backgrounds/banner-800.webp);
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -288,12 +291,20 @@ a {
 	padding: 0 20px;
 	background:
 		linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.2)),
-		url(../ressources/backgrounds/background-min.webp) center 30% / cover,
+		var(--banner-image) center 30% / cover,
 		#3a2a3a;
 }
 
-.banner {
-	position: relative;
+@media (min-width: 601px), (min-resolution: 2dppx) {
+	.banner {
+		--banner-image: url(../ressources/backgrounds/banner-1600.webp);
+	}
+}
+
+@media (min-width: 1201px), (min-width: 801px) and (min-resolution: 2dppx) {
+	.banner {
+		--banner-image: url(../ressources/backgrounds/banner-2400.webp);
+	}
 }
 
 .banner__wordmark {
@@ -1188,18 +1199,6 @@ a {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-}
-
-.island--volcano img {
-	object-position: 40% 50%;
-}
-
-.island--ice img {
-	object-position: 50% 45%;
-}
-
-.island--ocean img {
-	object-position: 55% 50%;
 }
 
 .island__name {

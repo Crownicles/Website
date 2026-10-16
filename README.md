@@ -1,13 +1,13 @@
 <div align="center">
-  <img src="https://crownicles.com/public/ressources/Crownicles_logo_HD.png" width="200" alt="Crownicles Logo" style="border-radius: 50%;">
+  <img src="https://crownicles.com/public/ressources/app/icon-512.png" width="160" alt="Crownicles Logo" style="border-radius: 22%;">
 
   # Crownicles Website
 
-  **Official website for [Crownicles](https://github.com/DraftBot-A-Discord-Adventure/DraftBot) - A Discord Text Adventure Game**
+  **Official website for [Crownicles](https://github.com/Crownicles/Crownicles), a medieval text RPG on Discord and soon on mobile**
 
   [![Website](https://img.shields.io/website?url=https%3A%2F%2Fcrownicles.com&label=crownicles.com)](https://crownicles.com)
   [![Discord](https://img.shields.io/discord/429765017332613120.svg?label=Discord&logo=discord&color=5865F2)](https://discord.gg/5JqrMtZ)
-  [![GitHub Stars](https://img.shields.io/github/stars/DraftBot-A-Discord-Adventure/Website.svg?label=Stars&style=social)](https://github.com/DraftBot-A-Discord-Adventure/Website)
+  [![GitHub Stars](https://img.shields.io/github/stars/Crownicles/Website.svg?label=Stars&style=social)](https://github.com/Crownicles/Website)
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 </div>
@@ -18,7 +18,7 @@
 
 This repository contains the source code for the official **Crownicles** website ([crownicles.com](https://crownicles.com)).
 
-Crownicles is a text adventure game on Discord. The story takes place in a medieval world where the player embodies an adventurer competing to win the princess's hand. Travel, earn points, face dangers, and climb the leaderboard!
+Crownicles is a medieval text RPG, played on Discord and soon on a mobile app. The story takes place in a medieval world where the player embodies an adventurer competing to win the princess's hand. Travel, earn points, face dangers, and climb the leaderboard!
 
 ## 🛠️ Tech Stack
 
@@ -39,7 +39,7 @@ Before you begin, ensure you have the following installed:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/DraftBot-A-Discord-Adventure/Website.git
+git clone https://github.com/Crownicles/Website.git
 cd Website
 ```
 
@@ -88,14 +88,14 @@ Website/
 
 ### Reporting Issues
 
-Found a bug or have a suggestion? [Open an issue](https://github.com/DraftBot-A-Discord-Adventure/Website/issues/new)!
+Found a bug or have a suggestion? [Open an issue](https://github.com/Crownicles/Website/issues/new)!
 
 ## 🔗 Links
 
 | Resource | Link |
 |----------|------|
 | 🌐 Website | [crownicles.com](https://crownicles.com) |
-| 🎮 Main Repository | [Crownicles/Crownicles](https://github.com/DraftBot-A-Discord-Adventure/DraftBot) |
+| 🎮 Main Repository | [Crownicles/Crownicles](https://github.com/Crownicles/Crownicles) |
 | 💬 Discord Server | [Join us!](https://discord.gg/5JqrMtZ) |
 | 📖 Player Guide | [guide.crownicles.com](https://guide.crownicles.com) |
 | 💡 Suggestions | [feedback.crownicles.com](https://feedback.crownicles.com/) |
@@ -108,6 +108,6 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 <div align="center">
   
-  Made with ❤️ by the [Crownicles Team](https://github.com/DraftBot-A-Discord-Adventure)
+  Made with ❤️ by the [Crownicles Team](https://github.com/Crownicles)
 
 </div>

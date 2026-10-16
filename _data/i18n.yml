@@ -34,13 +34,10 @@ fr:
     list:
       - id: volcano
         name: Plage noire
-        size: [800, 562]
       - id: ice
         name: Rivage gla-gla
-        size: [800, 608]
       - id: ocean
         name: Plage de coquillage
-        size: [800, 608]
   facts:
     - figure: "2 400+"
       stat: discord
@@ -156,13 +153,10 @@ en:
     list:
       - id: volcano
         name: Black beach
-        size: [800, 562]
       - id: ice
         name: Icy-icy Shore
-        size: [800, 608]
       - id: ocean
         name: Shell beach
-        size: [800, 608]
   facts:
     - figure: "2,400+"
       stat: discord

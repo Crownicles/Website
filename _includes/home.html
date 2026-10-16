@@ -78,7 +78,7 @@
   <template id="demo-end">
     <div class="end">
       <img class="end__icon" src="{{ '/public/ressources/app/icon-256.png' | relative_url }}" alt="" width="72" height="72">
-      <h3 class="end__title">{{ t.demo_ui.end_title }}</h3>
+      <p class="end__title">{{ t.demo_ui.end_title }}</p>
       {% include stores.html stacked=true %}
       <button class="text-button" type="button" data-restart>{{ t.demo_ui.retry }}</button>
     </div>
@@ -106,7 +106,8 @@
   <div class="wrap facts">
     {%- for fact in t.facts %}
     <article class="fact">
-      <img class="fact__art" src="{{ '/public/ressources/art/' | append: fact.art | append: '.webp' | relative_url }}" alt="" loading="lazy" decoding="async">
+      {%- assign art_size = site.data.art[fact.art] %}
+      <img class="fact__art" src="{{ '/public/ressources/art/' | append: fact.art | append: '.webp' | relative_url }}" alt="" width="{{ art_size[0] }}" height="{{ art_size[1] }}" loading="lazy" decoding="async">
       <p class="fact__figure" data-live-stat="{{ fact.stat }}">{{ fact.figure }}</p>
       <h2 class="fact__title">{{ fact.title }}</h2>
       <p class="fact__text">{{ fact.text }}</p>
@@ -133,7 +134,8 @@
       <div class="islands__deck">
         {%- for island in t.islands.list %}
         <a class="island island--{{ island.id }}" href="{{ '/public/ressources/kingdom/island-' | append: island.id | append: '-large.webp' | relative_url }}" target="_blank" rel="noopener" aria-label="{{ t.islands.open }} : {{ island.name }}">
-          <img src="{{ '/public/ressources/kingdom/island-' | append: island.id | append: '.webp' | relative_url }}" alt="" width="{{ island.size[0] }}" height="{{ island.size[1] }}" loading="lazy" decoding="async">
+          {%- assign island_base = '/public/ressources/kingdom/island-' | append: island.id | relative_url %}
+          <img src="{{ island_base }}-320.webp" srcset="{{ island_base }}-320.webp 320w, {{ island_base }}-640.webp 640w" sizes="(max-width: 800px) 230px, 330px" alt="" width="640" height="640" loading="lazy" decoding="async">
           <span class="island__name">{{ island.name }}</span>
         </a>
         {%- endfor %}
@@ -149,7 +151,7 @@
 <section class="block">
   <div class="wrap">
     <a class="donate-banner" href="{{ t.footer.donate_url | relative_url }}">
-      <img class="donate-banner__art" src="{{ '/public/ressources/art/king-throne.webp' | relative_url }}" alt="" loading="lazy" decoding="async">
+      <img class="donate-banner__art" src="{{ '/public/ressources/art/king-throne.webp' | relative_url }}" alt="" width="{{ site.data.art['king-throne'][0] }}" height="{{ site.data.art['king-throne'][1] }}" loading="lazy" decoding="async">
       <div class="donate-banner__text">
         <p class="donate-banner__eyebrow">{{ t.donate.eyebrow }}</p>
         <h2>{{ t.donate.title }}</h2>
