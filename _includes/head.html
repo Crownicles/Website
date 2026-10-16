@@ -16,7 +16,13 @@
   })();
 </script>
 
+{%- if page.redirect_to %}
+<meta http-equiv="refresh" content="0; url={{ page.redirect_to }}">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="{{ page.redirect_to }}">
+{%- else %}
 <link rel="canonical" href="{{ page.url | absolute_url }}">
+{%- endif %}
 {%- if page.translations %}
 {%- for translation in page.translations %}
 <link rel="alternate" hreflang="{{ translation[0] }}" href="{{ translation[1] | absolute_url }}">

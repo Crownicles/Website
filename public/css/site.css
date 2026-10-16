@@ -1428,6 +1428,18 @@ a {
 	}
 }
 
+/* ---------- Page not found ---------- */
+
+.not-found {
+	padding-bottom: 24px;
+}
+
+.not-found__art {
+	width: auto;
+	height: 180px;
+	margin: 0 auto 24px;
+}
+
 /* ---------- Footer ---------- */
 
 .site-footer {

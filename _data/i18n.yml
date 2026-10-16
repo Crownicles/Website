@@ -4,8 +4,8 @@ fr:
   other_lang: en
   other_lang_label: EN
   other_lang_name: English
-  meta_title: Crownicles · Jeu d'aventure médiéval sur mobile et Discord
-  meta_description: Un jeu d'aventure médiéval textuel, sur Discord et bientôt sur mobile. Votre personnage voyage seul, vous faites les choix.
+  meta_title: Crownicles · Jeu de rôle médiéval sur Discord et mobile
+  meta_description: RPG textuel médiéval gratuit et open source, jouable avec un bot Discord et bientôt sur mobile. Votre personnage voyage, vous faites les choix.
   download: Jouer
   theme:
     to_dark: Passer en thème Nuit
@@ -126,8 +126,8 @@ en:
   other_lang: fr
   other_lang_label: FR
   other_lang_name: Français
-  meta_title: Crownicles · Medieval adventure game on mobile and Discord
-  meta_description: A medieval text adventure game, on Discord and soon on mobile. Your character travels on its own, you make the choices.
+  meta_title: Crownicles · Medieval RPG on Discord and mobile
+  meta_description: A free, open-source medieval text RPG, played through a Discord bot and soon on mobile. Your character travels, you make the choices.
   download: Play
   theme:
     to_dark: Switch to the Night theme

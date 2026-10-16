@@ -32,4 +32,52 @@
       <changefreq>MONTHLY</changefreq>
       <priority>0.5</priority>
 </url>
+<url>
+      <loc>https://crownicles.com/confidentialite/</loc>
+      <xhtml:link rel="alternate" hreflang="fr" href="https://crownicles.com/confidentialite/"/>
+      <xhtml:link rel="alternate" hreflang="en" href="https://crownicles.com/privacy/"/>
+      <lastmod>2026-10-16</lastmod>
+      <changefreq>YEARLY</changefreq>
+      <priority>0.3</priority>
+</url>
+<url>
+      <loc>https://crownicles.com/privacy/</loc>
+      <xhtml:link rel="alternate" hreflang="fr" href="https://crownicles.com/confidentialite/"/>
+      <xhtml:link rel="alternate" hreflang="en" href="https://crownicles.com/privacy/"/>
+      <lastmod>2026-10-16</lastmod>
+      <changefreq>YEARLY</changefreq>
+      <priority>0.3</priority>
+</url>
+<url>
+      <loc>https://crownicles.com/conditionsutilisation/</loc>
+      <xhtml:link rel="alternate" hreflang="fr" href="https://crownicles.com/conditionsutilisation/"/>
+      <xhtml:link rel="alternate" hreflang="en" href="https://crownicles.com/tos/"/>
+      <lastmod>2026-10-16</lastmod>
+      <changefreq>YEARLY</changefreq>
+      <priority>0.3</priority>
+</url>
+<url>
+      <loc>https://crownicles.com/tos/</loc>
+      <xhtml:link rel="alternate" hreflang="fr" href="https://crownicles.com/conditionsutilisation/"/>
+      <xhtml:link rel="alternate" hreflang="en" href="https://crownicles.com/tos/"/>
+      <lastmod>2026-10-16</lastmod>
+      <changefreq>YEARLY</changefreq>
+      <priority>0.3</priority>
+</url>
+<url>
+      <loc>https://crownicles.com/suppression-compte/</loc>
+      <xhtml:link rel="alternate" hreflang="fr" href="https://crownicles.com/suppression-compte/"/>
+      <xhtml:link rel="alternate" hreflang="en" href="https://crownicles.com/account-deletion/"/>
+      <lastmod>2026-10-16</lastmod>
+      <changefreq>YEARLY</changefreq>
+      <priority>0.3</priority>
+</url>
+<url>
+      <loc>https://crownicles.com/account-deletion/</loc>
+      <xhtml:link rel="alternate" hreflang="fr" href="https://crownicles.com/suppression-compte/"/>
+      <xhtml:link rel="alternate" hreflang="en" href="https://crownicles.com/account-deletion/"/>
+      <lastmod>2026-10-16</lastmod>
+      <changefreq>YEARLY</changefreq>
+      <priority>0.3</priority>
+</url>
 </urlset>
