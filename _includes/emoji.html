@@ -1,0 +1,1 @@
+<img class="emoji{% if include.class %} {{ include.class }}{% endif %}" src="{{ '/public/ressources/twemoji/' | append: include.e | append: '.svg' | relative_url }}" alt="{{ include.alt }}" draggable="false" width="20" height="20"{% unless include.alt %} aria-hidden="true"{% endunless %}>

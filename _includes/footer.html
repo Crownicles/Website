@@ -1,18 +1,15 @@
-<footer id="footer" class="smallPadding">
-    <div class="container">
-        <p class="copyright center">
-            <var id="year">{{ site.time | date: '%Y' }}</var> © Crownicles.
-            Special thanks to
-            <a href="https://behance.net/mw3y" rel="noopener" target="_blank">MΛX</a>, icons from
-            <a href="https://icons8.com" rel="noopener" target="_blank">icons8.com</a> &
-            background by <a
-                href='https://www.freepik.com/free-vector/medieval-castle-interior-flat-cartoon-composition-with-king-throne-armed-knight-coat-arms-guard_6845842.htm'>macrovector
-            -
-            fr.freepik.com</a>
-        </p>
-    </div>
-    <p class="copyright center">
-        Read about how respectful of your privacy we are here : <a
-            href="{{ '/privacy/' | relative_url }}">https://crownicles.com/privacy</a>
-    </p>
+<footer class="site-footer">
+  <div class="wrap">
+    <nav class="footer-links">
+      <a href="https://guide.crownicles.com" rel="noopener" target="_blank">{{ t.footer.guide }}</a>
+      <a href="https://github.com/Crownicles/Crownicles" rel="noopener" target="_blank">GitHub</a>
+      <a href="{{ t.footer.donate_url | relative_url }}">{{ t.footer.donate }}</a>
+      <a href="{{ site.bot_invite_url }}" rel="noopener" target="_blank">{{ t.footer.add_bot }}</a>
+      <a href="{{ site.support_url }}" rel="noopener" target="_blank">{{ t.footer.help }}</a>
+      <a href="{{ t.footer.privacy_url | relative_url }}">{{ t.footer.privacy }}</a>
+      <a href="{{ t.footer.terms_url | relative_url }}">{{ t.footer.terms }}</a>
+      <a href="{{ t.footer.deletion_url | relative_url }}">{{ t.footer.deletion }}</a>
+    </nav>
+    <p>© {{ site.time | date: '%Y' }} Crownicles · {{ t.footer.credits }}</p>
+  </div>
 </footer>

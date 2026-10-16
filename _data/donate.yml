@@ -1,0 +1,58 @@
+tiers:
+  - art: lady
+    price: 5
+  - art: squire
+    price: 10
+    popular: true
+  - art: soldier
+    price: 15
+  - art: herald
+    price: 25
+  - art: king
+    price: 35
+  - art: king-throne
+    price: 50
+
+fr:
+  meta_title: Crownicles · Soutenir le projet
+  meta_description: Crownicles est gratuit et sans publicité. Soutenez ses serveurs et son développement, et recevez badges, stickers et goodies en échange.
+  eyebrow: Soutenir le projet
+  title: Crownicles est gratuit, sans publicité.
+  text: Les serveurs et le développement sont payés par les dons des joueurs, et chaque euro va à Crownicles. En échange, vous recevez des avantages dans le jeu et des goodies chez vous.
+  choose: Choisir un palier ↓
+  donate: Donner
+  names: [Reconnaissance, Gratitude, Soutien, Ambassadeur, Soutien premium, Je veux tout]
+  perks:
+    - [Badge donateur sur votre profil, Rôle donateur sur Discord]
+    - [Badge et rôle donateur, Nommez un nouvel objet du jeu]
+    - [Tout le palier Gratitude, Pack de stickers classique (2 stickers)]
+    - [Tout le palier Gratitude, Pack de stickers premium (3 stickers), 1 badge]
+    - [Tout le palier Gratitude, Pack de stickers deluxe (5 stickers), 1 badge, Un porte-clés ou un magnet Crownicles]
+    - [Tout le palier Gratitude, Énorme pack de stickers (8 stickers), 2 badges, Un porte-clés et un magnet Crownicles]
+  goodies_title: De vrais goodies, envoyés chez vous
+  goodies_text: Stickers, porte-clés et magnets à la couronne de Crownicles. La liste complète des avantages est sur notre Discord.
+  goodies_alt: Un sticker Crownicles, le badge donateur sur un profil et un pin's
+  perks_link: Voir les avantages
+  github_link: Donner via GitHub
+
+en:
+  meta_title: Crownicles · Support the project
+  meta_description: Crownicles is free, with no ads. Support its servers and development, and receive badges, stickers and goodies in return.
+  eyebrow: Support the project
+  title: Crownicles is free, with no ads.
+  text: The servers and the development are paid for by players' donations, and every euro goes to Crownicles. In return, you get perks in the game and goodies at home.
+  choose: Choose a tier ↓
+  donate: Donate
+  names: [Acknowledgement, Recognition, Support, Ambassador, Premium Supporter, Give me everything]
+  perks:
+    - [Donator badge on your profile, Donator role on Discord]
+    - [Donator badge and role, Name a new item in the game]
+    - [Everything in Recognition, Classic sticker pack (2 stickers)]
+    - [Everything in Recognition, Premium sticker pack (3 stickers), 1 badge]
+    - [Everything in Recognition, Deluxe sticker pack (5 stickers), 1 badge, A Crownicles keyring or magnet]
+    - [Everything in Recognition, Huge sticker pack (8 stickers), 2 badges, A Crownicles keyring and magnet]
+  goodies_title: Real goodies, sent to your door
+  goodies_text: Stickers, keyrings and magnets with the crown of Crownicles. The full list of perks is on our Discord.
+  goodies_alt: A Crownicles sticker, the donator badge on a profile, and a pin
+  perks_link: See the perks
+  github_link: Donate on GitHub

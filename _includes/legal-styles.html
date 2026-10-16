@@ -3,20 +3,20 @@
         max-width: 900px;
         margin: 0 auto;
         padding: 40px 20px;
-        color: #23272a;
+        color: var(--ink);
     }
     
     .legal-page .page-title {
         font-size: 42px;
         font-weight: 700;
-        color: #000;
+        color: var(--ink);
         margin-bottom: 10px;
         text-align: center;
     }
     
     .legal-page .last-updated {
         text-align: center;
-        color: #666;
+        color: var(--muted);
         font-size: 14px;
         margin-bottom: 20px;
     }
@@ -25,14 +25,14 @@
         text-align: center;
         margin-bottom: 40px;
         padding-bottom: 30px;
-        border-bottom: 2px solid #000;
+        border-bottom: 2px solid var(--ink);
     }
     
     .legal-page .related-link a {
         display: inline-block;
         padding: 10px 20px;
-        background: #000;
-        color: white !important;
+        background: var(--ink);
+        color: var(--paper) !important;
         border-radius: 8px;
         font-weight: 600;
         text-decoration: none;
@@ -40,22 +40,22 @@
     }
     
     .legal-page .related-link a:hover {
-        background: #333;
+        opacity: 0.85;
         transform: translateY(-2px);
     }
     
     .legal-page .toc {
-        background: #f5f5f5;
+        background: var(--paper);
         border-radius: 12px;
         padding: 25px 30px;
         margin-bottom: 40px;
-        border-left: 4px solid #000;
+        border-left: 4px solid var(--ink);
     }
     
     .legal-page .toc-title {
         font-size: 18px;
         font-weight: 700;
-        color: #000;
+        color: var(--ink);
         margin-bottom: 15px;
     }
     
@@ -66,7 +66,7 @@
     }
     
     .legal-page .toc-list a {
-        color: #000;
+        color: var(--ink);
         font-size: 14px;
         font-weight: 500;
         transition: all 0.2s ease;
@@ -76,23 +76,23 @@
     }
     
     .legal-page .toc-list a:hover {
-        color: #444;
+        color: var(--muted);
         transform: translateX(5px);
     }
     
     .legal-page .toc-list a::before {
         content: "→";
-        color: #000;
+        color: var(--ink);
         font-size: 12px;
     }
     
     .legal-page .section {
         margin-bottom: 35px;
         padding: 25px;
-        background: #fff;
+        background: var(--paper);
         border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        border: 1px solid #ddd;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        border: 1px solid var(--line);
         transition: box-shadow 0.3s ease;
     }
     
@@ -103,16 +103,16 @@
     .legal-page .section-title {
         font-size: 22px;
         font-weight: 700;
-        color: #000;
+        color: var(--ink);
         margin-bottom: 15px;
         padding-bottom: 10px;
-        border-bottom: 2px solid #000;
+        border-bottom: 2px solid var(--ink);
     }
     
     .legal-page .section-subtitle {
         font-size: 18px;
         font-weight: 600;
-        color: #000;
+        color: var(--ink);
         margin-top: 20px;
         margin-bottom: 10px;
     }
@@ -120,7 +120,7 @@
     .legal-page p {
         font-size: 16px;
         line-height: 1.8;
-        color: #333;
+        color: var(--ink);
         margin-bottom: 12px;
     }
     
@@ -132,7 +132,7 @@
     .legal-page li {
         font-size: 15px;
         line-height: 1.7;
-        color: #333;
+        color: var(--ink);
         margin-bottom: 10px;
         padding-left: 25px;
         position: relative;
@@ -141,7 +141,7 @@
     
     .legal-page li::before {
         content: "•";
-        color: #000;
+        color: var(--ink);
         font-weight: bold;
         font-size: 18px;
         position: absolute;
@@ -150,26 +150,26 @@
     }
     
     .legal-page a {
-        color: #000;
+        color: var(--ink);
         font-weight: 600;
         text-decoration: underline;
         transition: color 0.2s ease;
     }
     
     .legal-page a:hover {
-        color: #444;
+        color: var(--muted);
     }
     
     .legal-page .highlight-box {
-        background: #f5f5f5;
+        background: var(--paper);
         border-radius: 8px;
         padding: 15px 20px;
         margin: 15px 0;
-        border-left: 4px solid #000;
+        border-left: 4px solid var(--ink);
     }
     
     .legal-page .contact-box {
-        background: #f5f5f5;
+        background: var(--paper);
         border-radius: 12px;
         padding: 25px;
         margin-top: 20px;
@@ -180,8 +180,8 @@
         display: inline-block;
         margin: 5px 15px;
         padding: 10px 20px;
-        background: #000;
-        color: white !important;
+        background: var(--ink);
+        color: var(--paper) !important;
         border-radius: 8px;
         font-weight: 600;
         transition: all 0.3s ease;
@@ -189,7 +189,7 @@
     }
     
     .legal-page .contact-box a:hover {
-        background: #333;
+        opacity: 0.85;
         transform: translateY(-2px);
     }
     

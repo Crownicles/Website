@@ -1,49 +1,62 @@
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>{% if page.title %}{{ page.title }}{% else %}Crownicles{% endif %}</title>
-<meta name="description" content="{% if page.description %}{{ page.description }}{% else %}Crownicles is an open-source multiplayer text adventure game. Begin your journey in a medieval world and battle to win the kingdom's princess's hand.{% endif %}">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+{%- assign meta_title = page.title | default: t.meta_title -%}
+{%- assign meta_description = page.description | default: t.meta_description -%}
+{%- assign og_image = '/public/ressources/app/og-image.jpg' | absolute_url -%}
+<title>{{ meta_title }}</title>
+<meta name="description" content="{{ meta_description }}">
+<meta name="theme-color" content="#F4F4F5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101012" media="(prefers-color-scheme: dark)">
+<script>
+  (function () {
+    var stored = null;
+    try { stored = localStorage.getItem("theme"); } catch (error) {}
+    var dark = stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.dataset.theme = dark ? "dark" : "light";
+  })();
+</script>
 
-<!-- Canonical URL -->
-<link rel="canonical" href="{{ site.url }}{{ page.url | relative_url }}">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+{%- if page.translations %}
+{%- for translation in page.translations %}
+<link rel="alternate" hreflang="{{ translation[0] }}" href="{{ translation[1] | absolute_url }}">
+{%- endfor %}
+<link rel="alternate" hreflang="x-default" href="{{ page.translations.fr | absolute_url }}">
+{%- endif %}
 
-<!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="{{ site.url }}{{ page.url | relative_url }}">
-<meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}Crownicles{% endif %}">
-<meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}Crownicles is an open-source multiplayer text adventure game. Begin your journey in a medieval world and battle to win the kingdom's princess's hand.{% endif %}">
-<meta property='og:image' content='https://bastlast.github.io/Crownicles-A-Discord-Adventure/public/ressources/logo-min.png'/>
-<meta property="og:site_name" content="crownicles.com"/>
+<meta property="og:site_name" content="Crownicles">
+<meta property="og:locale" content="{{ t.locale }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:title" content="{{ meta_title }}">
+<meta property="og:description" content="{{ meta_description }}">
+<meta property="og:image" content="{{ og_image }}">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="500">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@{{ site.twitter_username }}">
+<meta name="twitter:image" content="{{ og_image }}">
 
-<!-- Schema.org JSON-LD for SEO -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "VideoGame",
   "name": "Crownicles",
-  "description": "{% if page.description %}{{ page.description }}{% else %}Crownicles is an open-source multiplayer text adventure game. Begin your journey in a medieval world and battle to win the kingdom's princess's hand.{% endif %}",
-  "image": "https://bastlast.github.io/Crownicles-A-Discord-Adventure/public/ressources/logo-min.png",
-  "url": "{{ site.url }}{{ page.url | relative_url }}",
-  "applicationCategory": "Game",
-  "genre": "Role-playing game",
-  "gamePlatform": "Discord"
+  "description": {{ meta_description | jsonify }},
+  "image": "{{ og_image }}",
+  "url": "{{ site.url }}",
+  "applicationCategory": "GameApplication",
+  "genre": ["Role-playing game", "Text adventure"],
+  "gamePlatform": ["Discord"],
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+  "sameAs": ["https://github.com/Crownicles/Crownicles"]
 }
 </script>
 
-<!-- Favicon -->
-<link href="{{ '/public/ressources/favicon.ico' | relative_url }}" rel="shortcut icon" type="image/x-icon"/>
-<link href="{{ '/public/ressources/favicon.ico' | relative_url }}" rel="icon" type="image/x-icon"/>
+<link rel="icon" href="{{ '/public/ressources/favicon.ico' | relative_url }}" sizes="any">
+<link rel="icon" type="image/png" href="{{ '/public/ressources/app/icon-256.png' | relative_url }}">
+<link rel="apple-touch-icon" href="{{ '/public/ressources/app/icon-256.png' | relative_url }}">
 
-<!-- CSS -->
-<link rel="preload" href="{{ '/public/css/home.css' | relative_url }}" as="style">
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
-      integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w=="
-      crossorigin="anonymous" as="style">
-<link rel="stylesheet" href="{{ '/public/css/home.css' | relative_url }}">
-
-<!-- Animation library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"
-        integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw=="
-        crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
-      integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w=="
-      crossorigin="anonymous"/>
+<link rel="preload" href="{{ '/public/fonts/inter-latin-wght-normal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ '/public/css/site.css' | relative_url }}">
+<script src="{{ '/public/js/theme.js' | relative_url }}" defer></script>

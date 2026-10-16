@@ -1,30 +1,21 @@
-<header>
-    <a class="logo" href="{{ '/' | relative_url }}"><img src="{{ '/public/ressources/banner-min.webp' | relative_url }}" alt="logo"></a>
-    <nav>
-        <ul class="nav__links">
-            <li><a rel="noopener" target="_blank" href="https://guide.crownicles.com">About</a></li>
-            <li><a href="#add">Add the bot to your server</a></li>
-            <li><a rel="noopener" href="{{ '/donate/' | relative_url }}">Donate</a></li>
-            <li><a rel="noopener" target="_blank" href="https://github.com/Crownicles/Crownicles">Github</a></li>
-            <li><a rel="noopener" target="_blank" href="https://history.crownicles.com">History</a></li>
-            <li><a rel="noopener" target="_blank" href="https://discord.com/invite/5JqrMtZ">I need help</a></li>
-        </ul>
-    </nav>
-    <div class="menu">
-        <p class="button buttonWhite buttonSmall bold">Menu</p>
-    </div>
+{%- assign home = t.home_url | relative_url -%}
+{%- if page.translations -%}
+{%- assign other_url = page.translations[t.other_lang] | relative_url -%}
+{%- else -%}
+{%- assign other_url = site.data.i18n[t.other_lang].home_url | relative_url -%}
+{%- endif -%}
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="{{ home }}">
+      <img src="{{ '/public/ressources/app/icon-256.png' | relative_url }}" alt="" width="32" height="32">
+      Crownicles
+    </a>
+    <a class="nav-link" href="{{ t.footer.donate_url | relative_url }}">{{ t.footer.donate }}</a>
+    <button class="theme-toggle" type="button" data-theme-toggle data-label-dark="{{ t.theme.to_dark }}" data-label-light="{{ t.theme.to_light }}" aria-label="{{ t.theme.to_dark }}">
+      <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+    </button>
+    <a class="lang" href="{{ other_url }}" hreflang="{{ t.other_lang }}" title="{{ t.other_lang_name }}">{{ t.other_lang_label }}</a>
+    <a class="btn btn--small" href="{{ home }}#download">{{ t.download }}</a>
+  </div>
 </header>
-
-<div class="overlay">
-    <a class="close" href="#close" aria-label="Close menu">&times;</a>
-    <div class="overlay__content">
-        <ul>
-            <li><a rel="noopener" target="_blank" href="https://guide.crownicles.com">About</a></li>
-            <li><a href="#add">Add the bot to your server</a></li>
-            <li><a rel="noopener" href="{{ '/donate/' | relative_url }}">Donate</a></li>
-            <li><a rel="noopener" target="_blank" href="https://github.com/Crownicles/Crownicles">Github</a></li>
-            <li><a rel="noopener" target="_blank" href="https://history.crownicles.com">History</a></li>
-            <li><a rel="noopener" target="_blank" href="https://discord.com/invite/5JqrMtZ">I need help</a></li>
-        </ul>
-    </div>
-</div>

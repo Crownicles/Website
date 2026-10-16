@@ -1,0 +1,14 @@
+<div class="buttons{% if include.stacked %} buttons--stacked{% endif %}"{% unless include.stacked %} id="download"{% endunless %}>
+  <a class="btn store" href="{{ site.discord_url }}" rel="noopener" target="_blank">
+    {% include icon.html name="discord" size=22 %}
+    <span class="store__text"><small>{{ t.stores.discord_caption }}</small><strong>{{ t.stores.discord_name }}</strong></span>
+  </a>
+  <span class="btn btn--disabled store" aria-disabled="true">
+    {% include icon.html name="google-play" size=22 %}
+    <span class="store__text"><small>{{ t.stores.play_caption }}</small><strong>{{ t.stores.play_name }}</strong></span>
+  </span>
+  <span class="btn btn--disabled store" aria-disabled="true">
+    {% include icon.html name="apple" size=22 %}
+    <span class="store__text"><small>{{ t.stores.apple_caption }}</small><strong>{{ t.stores.apple_name }}</strong></span>
+  </span>
+</div>

@@ -1,0 +1,173 @@
+{
+ "id": 84,
+ "order": [
+  "compete",
+  "cheat",
+  "observe"
+ ],
+ "icons": {
+  "compete": "🎣",
+  "cheat": "🪤",
+  "observe": "🕵️",
+  "end": {
+   "0": "🌅",
+   "1": "🚶"
+  }
+ },
+ "effectIcons": {
+  "freezing": "🥶",
+  "hurt": "🤕",
+  "occupied": "🕑"
+ },
+ "effectDurations": {
+  "freezing": 60,
+  "hurt": 300
+ },
+ "mechanics": {
+  "compete": {
+   "0": {
+    "effect": "freezing",
+    "health": -10,
+    "money": -250,
+    "item": false
+   },
+   "1": {
+    "effect": "occupied",
+    "lostTime": 30,
+    "item": false
+   },
+   "2": {
+    "effect": "occupied",
+    "lostTime": 60,
+    "money": 150,
+    "item": false
+   },
+   "3": {
+    "effect": "occupied",
+    "lostTime": 300,
+    "health": 10,
+    "money": 550,
+    "item": true
+   }
+  },
+  "cheat": {
+   "0": {
+    "effect": "hurt",
+    "health": -15,
+    "money": -100,
+    "item": false
+   },
+   "1": {
+    "effect": "occupied",
+    "lostTime": 35,
+    "item": false
+   },
+   "2": {
+    "effect": "occupied",
+    "lostTime": 20,
+    "money": 100,
+    "item": false
+   },
+   "3": {
+    "effect": "occupied",
+    "lostTime": 30,
+    "money": 650,
+    "item": true
+   }
+  },
+  "observe": {
+   "0": {
+    "effect": "occupied",
+    "lostTime": 10,
+    "money": -50,
+    "item": false
+   },
+   "1": {
+    "effect": "occupied",
+    "lostTime": 15,
+    "money": 100,
+    "item": false
+   },
+   "2": {
+    "effect": "occupied",
+    "lostTime": 45,
+    "health": 15,
+    "item": false
+   }
+  },
+  "end": {
+   "0": {
+    "effect": "occupied",
+    "lostTime": 30,
+    "item": false
+   },
+   "1": {
+    "effect": "occupied",
+    "lostTime": 10,
+    "item": false
+   }
+  }
+ },
+ "fr": {
+  "intro": "Alors que vous déambulez sur les quais bruyants, vous remarquez un homme trapu à la barbe rousse, juché sur une caisse retournée, qui harangue les passants : il promet une chope de rhum pour chaque crabe pêché, et une surprise à qui sortira la plus grosse bête. Le concours est simple : les crabes ne se prennent ni au casier ni à l'épuisette, on les attire à la ligne, appâtés de restes de poisson. Cela demande de la patience, de l'adresse et un peu de chance.",
+  "choices": {
+   "compete": "Relever le défi et pêcher les crabes à la ligne.",
+   "cheat": "Tenter de tricher discrètement.",
+   "observe": "Observer les participants en retrait."
+  },
+  "outcomes": {
+   "compete": {
+    "0": "Quelques minutes passent et votre seau commence à se remplir de petits crabes. Soudain, une énorme pince surgit : un superbe crabe noir se saisit de votre appât. Vous parvenez à le remonter et, fier de vous, vous vous retournez pour le montrer au public. C'est alors qu'il vous pince violemment la main. La douleur vous fait lâcher la ligne et, dans une chute maladroite, vous tombez dans l'eau froide où vous perdez votre bourse. Le pêcheur roux vous aide à ressortir de l'eau et vous glisse une chope de rhum entre les mains pour vous réchauffer.",
+    "1": "Vous prenez la ficelle, l'appât au bout du fil, et le plongez doucement dans l'eau sombre du port. Un grand crabe noir s'y accroche, mais vous tirez si brusquement sur la ligne qu'il vous échappe, et dans la manœuvre, vous renversez votre seau qui s'écrase sur les pavés. Les petits crabes se dispersent dans tous les sens, provoquant les rires des spectateurs. Le maître, un peu moqueur, vous invite à retenter votre chance un autre jour.",
+    "2": "Soudain, une légère traction... puis plus forte. Vous remontez lentement la ligne quand un monstrueux crabe noir claque ses pinces. Vous réussissez à le sortir tant bien que mal, mais il s'échappe en glissant entre vos doigts juste avant la remise au maître. Ce dernier rit et vous offre tout de même une chope de rhum pour l'effort. Vous avez fait bonne impression, et les badauds vous jettent quelques pièces.",
+    "3": "Un grand crabe noir, presque aussi large qu'un bouclier, surgit brutalement d'un coin sombre du quai et attrape votre appât : c'est Maurice, la bête rare, et il est effrayant ! Vous gardez pourtant votre calme et, après une longue et incroyable lutte, vous parvenez à le sortir avec adresse. Le public applaudit, le maître vous félicite chaleureusement et vous remet une imposante chope de rhum ainsi qu'un petit sac de pièces d'or. Il vous offre en prime un objet mystérieux trouvé récemment dans les filets. Vous gagnez la confiance de quelques pêcheurs influents, dont l'un vous invite à partager un bon dîner."
+   },
+   "cheat": {
+    "0": "Trop sûr de vous, vous vous penchez vers le panier d'un concurrent distrait et saisissez le plus gros crabe, prêt à le faire passer pour le vôtre. Mais une main calleuse vous agrippe le poignet. Le pêcheur furieux vous expédie un coup de poing terrible en plein menton. Vous basculez en arrière, la mâchoire engourdie et un goût métallique sur la langue. La foule s'approche, les rires fusent, et le maître du concours exige une compensation avant de vous bannir du quai d'un geste sec.",
+    "1": "Alors que vous tentez d'introduire en cachette un crabe d'emprunt dans votre seau, un vieil homme au regard perçant observe toute la scène à bonne distance. Il n'en dit rien, mais s'approche du maître du concours et lui glisse quelques mots à l'oreille. Vous êtes retiré du classement sans explication, et l'ambiance se fait soudain lourde autour de vous. Des murmures vous poursuivent jusqu'au bout du quai.",
+    "2": "Un jeune garçon vous aborde discrètement, fier de son énorme prise. Quelques pièces échangées sous un filet renversé, et le marché est conclu. Vous glissez doucement le crabe dans votre seau, parmi vos autres prises. À l'évaluation, les juges s'émerveillent de sa carapace marbrée. Vous ne remportez pas le grand prix, mais une belle récompense vous est offerte, et des pêcheurs vous regardent désormais avec un certain respect.",
+    "3": "Juste avant le début du concours, vous échangez discrètement votre morceau de poisson contre un rare appât gélatineux dérobé à un pêcheur expérimenté. Le crabe que vous attrapez ainsi est d'une taille exceptionnelle, au point que plusieurs concurrents s'écartent en silence. Le crabe noir géant est pesé, acclamé, et le maître pêcheur vous proclame vainqueur sans discussion. En plus de la chope d'argent, un commerçant du port, ravi de votre audace, vous offre un objet."
+   },
+   "observe": {
+    "0": "Vous vous pensiez en sécurité, en retrait près d'un escalier de pierre, mais votre manque de vigilance vous coûte cher. Pendant que vous observiez attentivement les pêcheurs, un gamin pieds nus se faufile dans votre dos pour fouiller votre besace. Vous repérez au loin une silhouette disparaître derrière un muret : trop tard pour réagir. Vous grognez, amer, en refermant votre sac.",
+    "1": "En restant dans l'ombre des tonneaux, vous assistez à plusieurs manipulations : échanges, paniers truqués, alliances... Lorsqu'une querelle entre deux pêcheurs attire l'attention de la foule, vous en profitez pour vous approcher d'un seau et dérober un gros crabe que vous vous empressez de revendre au marché.",
+    "2": "Vous avez préféré observer à l'écart, installé sur une vieille caisse de transport. À vos côtés, un pêcheur à la peau tannée par le sel et les années partage quelques remarques discrètes sur la façon dont les participants trichent ou se ridiculisent. Vous souriez, et très vite l'échange devient plus animé, les rires fusent sans retenue, et le vacarme du port semble un instant lointain. Voyant que vous n'avez rien à manger, il ouvre son sac de toile et en sort une miche de pain, une boîte de sardines grillées et une bouteille de vin, qu'il partage sans hésiter, comme s'il vous connaissait depuis toujours."
+   },
+   "end": {
+    "0": "Vous vous asseyez sur une pile de filets secs, face à l'horizon. Pendant quelques minutes, vous laissez le soleil réchauffer votre visage, les muscles détendus et l'odeur des embruns dans les narines. Une mouette pousse un cri rauque. Combien de temps avez-vous passé à rêver ainsi ?",
+    "1": "Tandis que les cris d'excitation et les applaudissements résonnent derrière vous, vous prenez une autre voie et quittez le tumulte du concours de crabes. Vous n'avez rien à prouver ici : vous cherchez autre chose. L'aventure continue."
+   }
+  }
+ },
+ "en": {
+  "intro": "As you stroll along the bustling docks, you notice a stocky man with a red beard, perched on an upside-down crate, haranguing passersby: he’s promising a mug of rum for every crab caught, and a surprise for whoever lands the biggest one. The contest is simple: crabs can’t be caught with traps or nets; they’re reeled in on a line, baited with fish scraps. It takes patience, skill, and a little luck.",
+  "choices": {
+   "compete": "Take on the challenge and go crab fishing with a line.",
+   "cheat": "Try to cheat discreetly.",
+   "observe": "Observe the participants from a distance."
+  },
+  "outcomes": {
+   "compete": {
+    "0": "A few minutes pass, and your bucket begins to fill with little crabs. Suddenly, a huge claw shoots out: a magnificent black crab snatches your bait. You manage to reel it in and, feeling proud of yourself, you turn around to show it to the crowd. That’s when it clamps down hard on your hand. The pain makes you drop the line, and in a clumsy fall, you plunge into the cold water, where you lose your wallet. The red-haired fisherman helps you out of the water and slips a mug of rum into your hands to warm you up.",
+    "1": "You take the line, with the bait on the end, and gently lower it into the dark water of the harbor. A large black crab takes the bait, but you yank the line so suddenly that it slips away, and in the process, you knock over your bucket, which shatters on the cobblestones. The little crabs scatter in all directions, prompting laughter from the onlookers. The master, with a hint of mockery, invites you to try your luck again another day.",
+    "2": "Suddenly, a slight tug… then a stronger one. You slowly reel in the line when a monstrous black crab snaps its claws. You manage to pull it out as best you can, but it slips through your fingers and escapes just before you hand it to the master. He laughs and offers you a mug of rum anyway for your efforts. You’ve made a good impression, and the onlookers toss you a few coins.",
+    "3": "A huge black crab, almost as wide as a shield, suddenly bursts out of a dark corner of the dock and snatches your bait: it’s Maurice, the rare creature, and he’s terrifying! You manage to stay calm, though, and after a long and incredible struggle, you skillfully reel him in. The crowd applauds, the master warmly congratulates you, and hands you a massive mug of rum along with a small bag of gold coins. As a bonus, he gives you a mysterious object recently found in the nets. You earn the trust of a few influential fishermen, one of whom invites you to share a nice dinner."
+   },
+   "cheat": {
+    "0": "Overconfident, you lean toward the basket of a distracted competitor and grab the biggest crab, ready to pass it off as your own. But a calloused hand grabs your wrist. The furious fisherman lands a terrible punch right on your chin. You stagger backward, your jaw numb and a metallic taste on your tongue. The crowd gathers, laughter erupts, and the contest judge demands compensation before banishing you from the pier with a sharp wave of his hand.",
+    "1": "As you try to sneak a borrowed crab into your bucket, an old man with a piercing gaze watches the whole scene from a distance. He says nothing, but approaches the contest judge and whispers a few words in his ear. You’re removed from the rankings without explanation, and the atmosphere suddenly grows tense around you. Whispers follow you all the way to the end of the pier.",
+    "2": "A young boy approaches you discreetly, proud of his enormous catch. A few coins exchanged under an overturned net, and the deal is done. You gently slip the crab into your bucket, among your other catches. At the judging, the judges marvel at its marbled shell. You don’t win the grand prize, but you’re offered a nice reward, and the fishermen now look at you with a certain amount of respect.",
+    "3": "Just before the contest begins, you discreetly swap your piece of fish for a rare gelatinous bait stolen from an experienced fisherman. The crab you catch this way is exceptionally large—so much so that several competitors quietly step aside. The giant black crab is weighed, cheered, and the master fisherman declares you the undisputed winner. In addition to the silver tankard, a merchant at the harbor, delighted by your daring, offers you a gift."
+   },
+   "observe": {
+    "0": "You thought you were safe, tucked away near a stone staircase, but your lack of vigilance costs you dearly. While you were watching the fishermen closely, a barefoot kid sneaks up behind you to rummage through your bag. You spot a figure in the distance disappearing behind a low wall—too late to react. You grumble bitterly as you zip up your bag.",
+    "1": "As you stay hidden in the shadows behind the barrels, you witness various schemes: exchanges, rigged baskets, alliances... When a quarrel between two fishermen draws the crowd’s attention, you take the opportunity to sneak up to a bucket and steal a large crab, which you quickly resell at the market.",
+    "2": "You chose to watch from the sidelines, perched on an old shipping crate. Beside you, a fisherman with skin weathered by salt and the years shares a few quiet remarks about how the participants are cheating or making fools of themselves. You smile, and very quickly the conversation becomes more lively; laughter bursts forth unrestrained, and for a moment the clamor of the harbor seems far away. Seeing that you have nothing to eat, he opens his canvas bag and pulls out a loaf of bread, a can of grilled sardines, and a bottle of wine, which he shares without hesitation, as if he’d known you all his life."
+   },
+   "end": {
+    "0": "You sit on a pile of dry nets, facing the horizon. For a few minutes, you let the sun warm your face, your muscles relaxed and the scent of sea spray filling your nostrils. A seagull lets out a hoarse cry. How long have you been daydreaming like this?",
+    "1": "As shouts of excitement and applause echo behind you, you take a different path and leave the hustle and bustle of the crab race behind. You have nothing to prove here—you’re looking for something else. The adventure continues."
+   }
+  }
+ }
+}

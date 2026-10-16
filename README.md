@@ -66,11 +66,14 @@ Navigate to [http://127.0.0.1:4000](http://127.0.0.1:4000) to see the website lo
 ```
 Website/
 ├── _config.yml          # Jekyll configuration
+├── _data/
+│   ├── i18n.yml         # Homepage texts, FR and EN
+│   └── demo_event.json  # Event 84 played on the homepage, exported from the game files
 ├── _includes/           # Reusable HTML components
 │   ├── header.html
 │   ├── footer.html
 │   ├── head.html
-│   └── scripts.html
+│   └── home.html        # Homepage, shared by / (FR) and /en/
 ├── _layouts/            # Page templates
 │   └── default.html
 ├── _site/               # Generated static site (do not edit)
@@ -78,7 +81,7 @@ Website/
 │   ├── css/             # Stylesheets
 │   ├── js/              # JavaScript files
 │   └── ressources/      # Images and other resources
-├── index.html           # Homepage
+├── index.html           # Homepage (FR), en/index.html for English
 ├── Gemfile              # Ruby dependencies
 └── README.md            # This file
 ```

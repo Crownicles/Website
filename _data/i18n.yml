@@ -1,0 +1,243 @@
+fr:
+  locale: fr_FR
+  home_url: /
+  other_lang: en
+  other_lang_label: EN
+  other_lang_name: English
+  meta_title: Crownicles · Jeu d'aventure médiéval sur mobile et Discord
+  meta_description: Un jeu d'aventure médiéval textuel, sur Discord et bientôt sur mobile. Votre personnage voyage seul, vous faites les choix.
+  download: Jouer
+  theme:
+    to_dark: Passer en thème Nuit
+    to_light: Passer en thème Jour
+  stores:
+    play_caption: Bientôt sur
+    play_name: Google Play
+    apple_caption: Bientôt sur
+    apple_name: l'App Store
+    discord_caption: Jouer sur
+    discord_name: Discord
+  hero:
+    title: Un jeu d'aventure médiéval, sur mobile et Discord.
+  demo:
+    noscript: Activez JavaScript pour jouer.
+  map:
+    title: Le royaume
+    text: 55 lieux à parcourir.
+    image: map-fr
+    alt: Carte du royaume de Crownicles
+    open: Voir la carte
+  islands:
+    title: Les îles mystérieuses
+    text: 3 îles à explorer, dès le niveau 20.
+    open: Voir la carte
+    list:
+      - id: volcano
+        name: Plage noire
+        size: [800, 562]
+      - id: ice
+        name: Rivage gla-gla
+        size: [800, 608]
+      - id: ocean
+        name: Plage de coquillage
+        size: [800, 608]
+  facts:
+    - figure: "2 400+"
+      stat: discord
+      title: aventuriers sur notre Discord
+      text: Une communauté active depuis 2018, qui aide les nouveaux et prépare les prochaines mises à jour.
+      link: Rejoindre le serveur
+      url: https://discord.gg/WwgBfSg
+      art: herald
+    - figure: "6"
+      stat: guild
+      title: amis par guilde
+      text: Formez une guilde, bâtissez votre domaine et affrontez les autres dans l'arène.
+      art: guard
+    - figure: "61"
+      stat: contributors
+      title: contributeurs open source
+      text: Tout le code est public. Les histoires du jeu sont écrites par les joueurs.
+      link: Voir sur GitHub
+      url: https://github.com/Crownicles/Crownicles
+      art: squire
+    - figure: "30+"
+      stat: guide
+      title: pages de guide
+      text: Classes, familiers, guildes, objets, histoire du royaume… tout est expliqué, en français et en anglais.
+      link: Lire le guide
+      url: https://guide.crownicles.com
+      art: king
+  donate:
+    eyebrow: Soutenir le projet
+    title: Crownicles est gratuit, sans publicité.
+    text: Le jeu vit grâce aux dons de ses joueurs. En échange, recevez des badges, des stickers et nommez un objet du jeu.
+    button: Faire un don
+  footer:
+    guide: Guide
+    donate: Faire un don
+    donate_url: /faire-un-don/
+    help: Aide
+    add_bot: Ajouter le bot Discord
+    privacy: Confidentialité
+    privacy_url: /confidentialite/
+    terms: Conditions
+    terms_url: /conditionsutilisation/
+    deletion: Supprimer mon compte
+    deletion_url: /suppression-compte/
+    credits: Illustration macrovector (Freepik) · Emoji Twemoji (CC-BY 4.0)
+  demo_ui:
+    hero: Voyageur
+    level: Niveau 12
+    health: Vie
+    points: Points
+    travel_caption: Rapport · en voyage
+    travel_title: Tout se passe bien dans votre aventure
+    travel_subtitle: En route vers Rivière aux Crabes
+    arrived_caption: Rapport · arrivée
+    arrived_title: Vous êtes arrivé à destination
+    arrived_subtitle: "Rivière aux Crabes est en vue : continuez l'aventure pour découvrir ce qui vous y attend."
+    continue_report: Continuer l'aventure
+    remaining: Temps restant
+    next_stop: Prochain arrêt
+    collected: Points récoltés
+    now: Maintenant
+    advance: Avancer · 1 jeton
+    journal: Journal de Voyageur
+    your_action: Votre action
+    answering: Votre choix est envoyé…
+    continue: Continuer
+    end_title: Continuez l'aventure
+    retry: Rejouer l'extrait
+    fields:
+      points: Points
+      money: Argent
+      health: Santé
+      time_lost: Temps perdu
+    minutes_one: "{n} minute"
+    minutes_other: "{n} minutes"
+    hours: "{h} h"
+    hours_minutes: "{h} h {m}"
+    tabs: [Aventure, Profil, Familier, Guilde, Arène]
+
+en:
+  locale: en_US
+  home_url: /en/
+  other_lang: fr
+  other_lang_label: FR
+  other_lang_name: Français
+  meta_title: Crownicles · Medieval adventure game on mobile and Discord
+  meta_description: A medieval text adventure game, on Discord and soon on mobile. Your character travels on its own, you make the choices.
+  download: Play
+  theme:
+    to_dark: Switch to the Night theme
+    to_light: Switch to the Day theme
+  stores:
+    play_caption: Coming soon to
+    play_name: Google Play
+    apple_caption: Coming soon to
+    apple_name: the App Store
+    discord_caption: Play on
+    discord_name: Discord
+  hero:
+    title: A medieval adventure game, on mobile and Discord.
+  demo:
+    noscript: Enable JavaScript to play.
+  map:
+    title: The kingdom
+    text: 55 places to travel.
+    image: map-en
+    alt: Map of the Crownicles kingdom
+    open: See the map
+  islands:
+    title: The mysterious islands
+    text: 3 islands to explore, from level 20.
+    open: See the map
+    list:
+      - id: volcano
+        name: Black beach
+        size: [800, 562]
+      - id: ice
+        name: Icy-icy Shore
+        size: [800, 608]
+      - id: ocean
+        name: Shell beach
+        size: [800, 608]
+  facts:
+    - figure: "2,400+"
+      stat: discord
+      title: adventurers on our Discord
+      text: An active community since 2018, helping newcomers and shaping the next updates.
+      link: Join the server
+      url: https://discord.gg/WwgBfSg
+      art: herald
+    - figure: "6"
+      stat: guild
+      title: friends per guild
+      text: Found a guild, build your domain and take on the others in the arena.
+      art: guard
+    - figure: "61"
+      stat: contributors
+      title: open-source contributors
+      text: All of the code is public. The game's stories are written by players.
+      link: See on GitHub
+      url: https://github.com/Crownicles/Crownicles
+      art: squire
+    - figure: "30+"
+      stat: guide
+      title: pages of guide
+      text: Classes, pets, guilds, items, the kingdom's lore… everything is explained, in English and French.
+      link: Read the guide
+      url: https://guide.crownicles.com
+      art: king
+  donate:
+    eyebrow: Support the project
+    title: Crownicles is free, with no ads.
+    text: The game runs on its players' donations. In return, get badges, stickers and name an item in the game.
+    button: Donate
+  footer:
+    guide: Guide
+    donate: Donate
+    donate_url: /donate/
+    help: Help
+    add_bot: Add the Discord bot
+    privacy: Privacy
+    privacy_url: /privacy/
+    terms: Terms
+    terms_url: /tos/
+    deletion: Delete my account
+    deletion_url: /account-deletion/
+    credits: Illustration by macrovector (Freepik) · Twemoji emoji (CC-BY 4.0)
+  demo_ui:
+    hero: Traveller
+    level: Level 12
+    health: Health
+    points: Points
+    travel_caption: Report · travelling
+    travel_title: All is going well on your adventure
+    travel_subtitle: On the way to Crabs' River
+    arrived_caption: Report · arrival
+    arrived_title: You have reached your destination
+    arrived_subtitle: Crabs' River is in sight. Continue the adventure to find out what awaits you there.
+    continue_report: Continue the adventure
+    remaining: Time left
+    next_stop: Next stop
+    collected: Points earned
+    now: Now
+    advance: Advance · 1 token
+    journal: Traveller's journal
+    your_action: Your action
+    answering: Sending your choice…
+    continue: Continue
+    end_title: Continue the adventure
+    retry: Replay this scene
+    fields:
+      points: Points
+      money: Money
+      health: Health
+      time_lost: Time lost
+    minutes_one: "{n} minute"
+    minutes_other: "{n} minutes"
+    hours: "{h} h"
+    hours_minutes: "{h} h {m}"
+    tabs: [Adventure, Profile, Pet, Guild, Arena]

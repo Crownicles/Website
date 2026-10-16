@@ -1,18 +1,15 @@
+{%- assign lang = page.lang | default: "en" -%}
+{%- assign t = site.data.i18n[lang] -%}
 <!doctype html>
-<html lang="en">
+<html lang="{{ lang }}">
+<head>
 {% include head.html %}
+</head>
 <body>
-  {% unless page.custom_header_placement %}
-  <div class="header">
-    {% include header.html %}
-  </div>
-  {% endunless %}
-
+  {% include header.html %}
   <main>
     {{ content }}
   </main>
-
   {% include footer.html %}
-  {% include scripts.html %}
 </body>
 </html>

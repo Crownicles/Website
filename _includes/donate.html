@@ -1,0 +1,51 @@
+{%- assign lang = page.lang | default: "en" -%}
+{%- assign t = site.data.i18n[lang] -%}
+{%- assign d = site.data.donate[lang] -%}
+<section class="donate-hero">
+  <div class="wrap donate-hero__inner">
+    <div>
+      <p class="donate-banner__eyebrow">{{ d.eyebrow }}</p>
+      <h1>{{ d.title }}</h1>
+      <p>{{ d.text }}</p>
+      <a class="btn btn--light" href="#tiers">{{ d.choose }}</a>
+    </div>
+    <img src="{{ '/public/ressources/art/king-throne.webp' | relative_url }}" alt="" width="443" height="520">
+  </div>
+</section>
+
+<section class="block" id="tiers">
+  <div class="wrap">
+    <div class="tiers">
+      {%- for tier in site.data.donate.tiers %}
+      {%- assign i = forloop.index0 %}
+      <article class="tier{% if tier.popular %} tier--popular{% endif %}">
+        <div class="tier__art"><img src="{{ '/public/ressources/art/' | append: tier.art | append: '.webp' | relative_url }}" alt="" loading="lazy" decoding="async"></div>
+        <div class="tier__head">
+          <h2>{{ d.names[i] }}</h2>
+          <p class="tier__price">{{ tier.price }} €</p>
+        </div>
+        <ul>
+          {%- for perk in d.perks[i] %}
+          <li>{{ perk }}</li>
+          {%- endfor %}
+        </ul>
+        <a class="btn{% unless tier.popular %} btn--secondary{% endunless %}" href="https://www.paypal.com/paypalme/bastlast/{{ tier.price }}" target="_blank" rel="noopener">{{ d.donate }} {{ tier.price }} €</a>
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap goodies">
+    <img src="{{ '/public/ressources/art/goodies.webp' | relative_url }}" alt="{{ d.goodies_alt }}" width="500" height="500" loading="lazy">
+    <div>
+      <h2 class="title">{{ d.goodies_title }}</h2>
+      <p class="subtitle">{{ d.goodies_text }}</p>
+      <div class="buttons buttons--start">
+        <a class="btn btn--secondary" href="https://discord.com/channels/429765017332613120/1170425060864032812" target="_blank" rel="noopener">{% include icon.html name="discord" size=18 %}{{ d.perks_link }}</a>
+        <a class="btn btn--secondary" href="https://github.com/sponsors/BastLast" target="_blank" rel="noopener">{% include icon.html name="github" size=18 %}{{ d.github_link }}</a>
+      </div>
+    </div>
+  </div>
+</section>
