@@ -1597,6 +1597,16 @@ a {
 	margin-left: 0;
 }
 
+/* The photo has its own white backdrop: framed as a card, it reads as a picture in both themes. */
+.goodies img {
+	width: 100%;
+	height: auto;
+	aspect-ratio: 1;
+	border-radius: var(--radius);
+	background: #fff;
+	box-shadow: var(--card-shadow);
+}
+
 .btn--disabled svg {
 	filter: grayscale(1);
 	opacity: 0.6;
@@ -1636,9 +1646,13 @@ a {
 		padding-bottom: 24px;
 	}
 
-	.donate-hero img,
-	.goodies img {
+	.donate-hero img {
 		width: 240px;
+		margin: 0 auto;
+	}
+
+	.goodies img {
+		width: 260px;
 		margin: 0 auto;
 	}
 }
