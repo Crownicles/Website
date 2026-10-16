@@ -65,9 +65,50 @@
 		}).catch(() => {});
 	}
 
+	// Easter egg: switching the theme five times in a row plays a video over the page.
+	const EASTER_EGG_CLICKS = 5;
+	const EASTER_EGG_GAP_MS = 1500;
+	const EASTER_EGG_DURATION_MS = 6000;
+	const EASTER_EGG_FADE_MS = 400;
+	let streak = 0;
+	let lastClick = 0;
+
+	function showEasterEgg() {
+		if (!button?.dataset.easterEgg || document.querySelector(".easter-egg")) {
+			return;
+		}
+		const video = document.createElement("video");
+		video.className = "easter-egg";
+		video.src = button.dataset.easterEgg;
+		video.muted = true;
+		video.loop = true;
+		video.autoplay = true;
+		video.playsInline = true;
+		video.setAttribute("aria-hidden", "true");
+
+		function close() {
+			video.classList.add("easter-egg--leaving");
+			setTimeout(() => video.remove(), EASTER_EGG_FADE_MS);
+		}
+		video.addEventListener("error", () => video.remove());
+		document.body.append(video);
+		setTimeout(close, EASTER_EGG_DURATION_MS);
+	}
+
+	function countSwitch() {
+		const now = performance.now();
+		streak = now - lastClick <= EASTER_EGG_GAP_MS ? streak + 1 : 1;
+		lastClick = now;
+		if (streak >= EASTER_EGG_CLICKS) {
+			streak = 0;
+			showEasterEgg();
+		}
+	}
+
 	label();
 
 	button?.addEventListener("click", event => {
+		countSwitch();
 		const box = button.getBoundingClientRect();
 		const origin = event.detail > 0
 			? { x: event.clientX, y: event.clientY }
