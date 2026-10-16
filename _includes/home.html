@@ -98,8 +98,8 @@
     }
   }
   </script>
-  <script src="{{ '/public/js/demo.js' | relative_url }}" defer></script>
-  <script src="{{ '/public/js/stats.js' | relative_url }}" data-lang="{{ lang }}" defer></script>
+  <script src="{{ '/public/js/demo.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+  <script src="{{ '/public/js/stats.js' | relative_url }}?v={{ site.time | date: '%s' }}" data-lang="{{ lang }}" defer></script>
 </section>
 
 <section class="block" id="app">

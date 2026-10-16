@@ -74,5 +74,5 @@
 <link rel="preload" as="image" href="{{ '/public/ressources/backgrounds/banner-2400.webp' | relative_url }}" media="(min-width: 1201px), (min-width: 801px) and (min-resolution: 2dppx)" fetchpriority="high">
 <link rel="preload" as="image" href="{{ '/public/ressources/banner-min.webp' | relative_url }}" fetchpriority="high">
 {%- endif %}
-<link rel="stylesheet" href="{{ '/public/css/site.css' | relative_url }}">
-<script src="{{ '/public/js/theme.js' | relative_url }}" defer></script>
+<link rel="stylesheet" href="{{ '/public/css/site.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+<script src="{{ '/public/js/theme.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
