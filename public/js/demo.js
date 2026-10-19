@@ -301,6 +301,7 @@
 		screen.firstElementChild.appendChild(endTemplate.content.cloneNode(true));
 		screen.querySelector("[data-restart]").addEventListener("click", () => {
 			player = { ...initialPlayer };
+			mock = freshMock();
 			renderVitals();
 			renderTravel();
 		});
@@ -320,15 +321,30 @@
 	const STAR = icon("<path d=\"M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z\"/>");
 	const HEART = icon("<path d=\"M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z\"/>");
 	const GIFT = icon("<rect x=\"3\" y=\"8\" width=\"18\" height=\"4\" rx=\"1\"/><path d=\"M12 8v13\"/><path d=\"M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7\"/><path d=\"M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5\"/>");
+	const CLOCK = icon("<circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 6v6h4.5\"/>");
 	const SWORDS = icon("<path d=\"m13 19 6-6\"/><path d=\"M14.5 17.5 3.586 6.586A2 2 0 013 5.172V3h2.172a2 2 0 011.414.586L17.5 14.5\"/><path d=\"m14.828 6.172 2.586-2.586A2 2 0 0118.828 3H21v2.172a2 2 0 01-.586 1.414l-2.586 2.586\"/><path d=\"m16 16 4 4\"/><path d=\"m19 21 2-2\"/><path d=\"m5 14 4 4\"/><path d=\"m5 21-2-2\"/><path d=\"M7.5 16.5 4 20\"/>");
 
 	const count = value => numberFormat.format(value);
 
-	function gauge(label, glyph, value, max, tone) {
-		return `<div class="gauge" style="--tone: var(--${tone})">
-			<div class="gauge__head"><span>${glyph}${escapeHtml(label)}</span><b>${count(value)} / ${count(max)}</b></div>
+	function gauge(label, glyph, value, max, tone, name = "") {
+		return `<div class="gauge" style="--tone: var(--${tone})"${name ? ` data-gauge="${name}"` : ""}>
+			<div class="gauge__head"><span>${glyph}<span data-gauge-label>${escapeHtml(label)}</span></span><b data-gauge-value>${count(value)} / ${count(max)}</b></div>
 			<div class="gauge__track"><div class="gauge__fill" style="width: ${(value / max) * 100}%"></div></div>
 		</div>`;
+	}
+
+	function updateGauge(name, value, max, label) {
+		const node = elsewhere.querySelector(`[data-gauge="${name}"]`);
+		if (!node) {
+			return;
+		}
+		node.querySelector(".gauge__fill").style.width = `${(value / max) * 100}%`;
+		node.querySelector("[data-gauge-value]").textContent = `${count(value)} / ${count(max)}`;
+		if (label) {
+			node.querySelector("[data-gauge-label]").textContent = label;
+		}
+		node.classList.add("is-gain");
+		setTimeout(() => node.classList.remove("is-gain"), FLASH_MS);
 	}
 
 	/** Same layout as the road's header: emblem, caption, title, then the gauges that belong to it. */
@@ -343,12 +359,19 @@
 		</div>${gauges ? `<div class="gauges">${gauges}</div>` : ""}`;
 	}
 
-	function banner(glyph, label) {
-		return `<button class="action-banner mock-banner" type="button" data-in-app>${glyph}<span>${escapeHtml(label)}</span>${ARROW}</button>`;
+	/** A banner either plays its part right here (`action`) or belongs to the app. */
+	function banner(glyph, label, action = "") {
+		const target = action ? `data-action="${action}"` : "data-in-app";
+		return `<button class="action-banner mock-banner" type="button" ${target}>${glyph}<span>${escapeHtml(label)}</span>${ARROW}</button>`;
+	}
+
+	/** What the app shows once an action is spent: the same banner, greyed, saying when it comes back. */
+	function lockedBanner(label) {
+		return `<div class="action-banner mock-banner mock-banner--locked">${CLOCK}<span>${escapeHtml(label)}</span></div>`;
 	}
 
 	function quickActions(items) {
-		return `<div class="quick-actions">${items.map(([glyph, label]) => `<button class="quick-action" type="button" data-in-app>${emoji(glyph)}<span>${escapeHtml(label)}</span></button>`).join("")}</div>`;
+		return `<div class="quick-actions">${items.map(([glyph, label, action]) => `<button class="quick-action" type="button" ${action ? `data-action="${action}"` : "data-in-app"}>${emoji(glyph)}<span>${escapeHtml(label)}</span></button>`).join("")}</div>`;
 	}
 
 	function figures(items) {
@@ -377,6 +400,17 @@
 		</section>`;
 	}
 
+	// What was done in the mockups lasts while the visitor wanders between tabs, until the scene is replayed.
+	const PET_LOVE_MAX = 5;
+	const GUILD_XP_MAX = 9800;
+	const GUILD_REWARD = { money: 150, xp: 320 };
+
+	function freshMock() {
+		return { petLove: 4, petFed: false, guildClaimed: false, guildXp: 7420 };
+	}
+
+	let mock = freshMock();
+
 	function renderProfile() {
 		const text = ui.profile;
 		return `
@@ -389,20 +423,30 @@
 			${section(text.score_rank, figures([[text.score, `${emoji("🏅")}${count(player.score)}`], [text.glory, `${emoji("✨")}${count(GLORY)}`]])
 				+ keyValues([[text.rank, `${count(3412)} / ${count(48920)}`], [text.league, `${emoji("🥈")}${escapeHtml(ui.league_name)}`]]), { glyph: "🏆", action: text.rankings })}
 			${section(text.campaign, `<div class="panel">${gauge(text.progress, "", 34, 70, "ink")}</div>`, { glyph: "📖" })}
-			${section(text.information, rows([
-				{ icon: "🏟️", title: ui.guild.name, subtitle: text.guild },
-				{ icon: "🦊", title: ui.pet.name, subtitle: text.pet }
-			]))}
 		`;
 	}
 
 	function renderPet() {
 		const text = ui.pet;
+		const mood = mock.petLove >= PET_LOVE_MAX ? text.mood_fed : text.mood;
 		return `
-			<div class="pet-standing">${standing(emoji("🦊"), text.eyebrow, text.name, `${escapeHtml(text.subtitle)} ${emoji("♂️")}`, gauge(text.mood, HEART, 4, 5, "green"))}</div>
-			${banner(emoji("🍖"), text.feed)}
-			${quickActions([["😻", text.actions[0]], ["🗺️", text.actions[1]], ["🖋️", text.actions[2]]])}
+			${standing(`<span class="pet" data-pet>${emoji("🦊")}</span>`, text.eyebrow, text.name, `${escapeHtml(text.subtitle)} ${emoji("♂️")}`,
+				gauge(mood, HEART, mock.petLove, PET_LOVE_MAX, "green", "pet-love"))}
+			<div data-slot="feed">${mock.petFed ? lockedBanner(text.fed) : banner(emoji("🍖"), text.feed, "feed")}</div>
+			${quickActions([["😻", text.actions[0], "caress"], ["🗺️", text.actions[1]]])}
+			<p class="mock-note mock-note--lock" data-had-enough hidden>${escapeHtml(text.had_enough)}</p>
 		`;
+	}
+
+	function guildReward() {
+		const effect = (glyph, label, value, order) => `<span class="effect effect--gain" style="animation-delay: ${order * 90}ms">${glyph}<span>${escapeHtml(label)}</span><b>${escapeHtml(value)}</b></span>`;
+		return `<article class="journal mock-reward">
+			<div class="journal__head"><div class="journal__emblem">${GIFT}</div>${escapeHtml(ui.guild.reward)}</div>
+			<div class="effects">
+				${effect(emoji("💰"), ui.guild.reward_money, signed(GUILD_REWARD.money), 0)}
+				${effect(STAR, ui.guild.reward_xp, signed(GUILD_REWARD.xp), 1)}
+			</div>
+		</article>`;
 	}
 
 	function renderGuild() {
@@ -420,11 +464,10 @@
 			member("⚫", "Gauvain", roles.member, 8, 960)
 		];
 		return `
-			${standing(emoji("🏟️"), text.eyebrow, text.name, escapeHtml(text.level), gauge(ui.experience, STAR, 7420, 9800, "gold"))}
+			${standing(emoji("🏟️"), text.eyebrow, text.name, escapeHtml(text.level), gauge(ui.experience, STAR, mock.guildXp, GUILD_XP_MAX, "gold", "guild-xp"))}
 			${figures([[text.score, `${emoji("🏅")}${count(48210)}`], [text.treasury, `${emoji("💰")}${count(12400)}`], [text.rank, `${count(214)} / ${count(3980)}`]])}
 			<p class="mock-note">${escapeHtml(text.description)}</p>
-			${banner(GIFT, text.daily)}
-			${quickActions([["🍬", text.actions[0]], ["🐾", text.actions[1]], ["🏆", text.actions[2]]])}
+			<div data-slot="daily">${mock.guildClaimed ? guildReward() + lockedBanner(text.daily_done) : banner(GIFT, text.daily, "daily")}</div>
 			${section(text.members, rows(members), { hint: String(members.length) })}
 		`;
 	}
@@ -436,8 +479,7 @@
 			<div class="arena-identity">${rows([{ icon: "⚜️", title: ui.hero, subtitle: text.subtitle }])}</div>
 			<div class="panel">${gauge(ui.energy, emoji("⚡"), ENERGY.value, ENERGY.max, "green")}</div>
 			${figures([[text.glory, `${emoji("✨")}${count(GLORY)}`], [text.league, `${emoji("🥈")}${escapeHtml(ui.league_name)}`]])}
-			${banner(emoji("⚔️"), text.start)}
-			${quickActions([["⚜️", text.actions[0]], ["📜", text.actions[1]], ["🥈", text.actions[2]], ["🏆", text.actions[3]]])}
+			${banner(emoji("⚔️"), text.start, "fight")}
 		`;
 	}
 
@@ -460,12 +502,147 @@
 		screen.hidden = away;
 		elsewhere.hidden = !away;
 		elsewhere.innerHTML = away ? `<div class="app-view">${mockups[name]()}</div>` : "";
+		strokes = [];
 		backToTop();
 	}
 
 	tabButtons.forEach(button => button.addEventListener("click", () => selectTab(button.dataset.tab)));
 
-	// ---------- 6. What only the app does: a short word rather than a dead tap ----------
+	// ---------- 6. What can be played for pretend: caress and feed the pet, the guild's bonus, the arena's door ----------
+
+	const CARESS_MS = 700;
+	const FEED_MS = 1100;
+	const DAILY_MS = 700;
+	const PET_PATIENCE = { strokes: 5, withinMs: 6000, sulkMs: 5000 };
+	let strokes = [];
+
+	/** Little hearts or treats rise from the pet, as the app's dance motes do. */
+	function motes(host, glyph, amount) {
+		for (let index = 0; index < amount; index++) {
+			const mote = document.createElement("span");
+			mote.className = "mote";
+			mote.style.setProperty("--drift", `${(index - (amount - 1) / 2) * 18}px`);
+			mote.style.animationDelay = `${index * 120}ms`;
+			mote.innerHTML = glyph;
+			host.appendChild(mote);
+			setTimeout(() => mote.remove(), 1200 + index * 120);
+		}
+	}
+
+	function replay(node, className) {
+		node.classList.remove(className);
+		void node.offsetWidth;
+		node.classList.add(className);
+	}
+
+	function caress(button) {
+		const pet = elsewhere.querySelector("[data-pet]");
+		const now = Date.now();
+		strokes = [...strokes.filter(at => now - at < PET_PATIENCE.withinMs), now];
+
+		// As in the app, a pet stroked too often walks off for a moment rather than purring forever.
+		if (strokes.length >= PET_PATIENCE.strokes) {
+			strokes = [];
+			button.disabled = true;
+			pet.classList.add("is-sulking");
+			const hint = elsewhere.querySelector("[data-had-enough]");
+			hint.hidden = false;
+			setTimeout(() => {
+				button.disabled = false;
+				pet.classList.remove("is-sulking");
+				hint.hidden = true;
+			}, PET_PATIENCE.sulkMs);
+			return;
+		}
+		replay(pet, "is-caressed");
+		motes(pet.parentElement, `<span class="mote__heart">${HEART}</span>`, 2);
+		setTimeout(() => pet.classList.remove("is-caressed"), CARESS_MS);
+	}
+
+	async function feed(button) {
+		const pet = elsewhere.querySelector("[data-pet]");
+		button.disabled = true;
+		button.classList.add("is-pressed");
+		replay(pet, "is-eating");
+		motes(pet.parentElement, emoji("🍖"), 3);
+		await wait(FEED_MS);
+
+		mock.petLove = Math.min(PET_LOVE_MAX, mock.petLove + 1);
+		mock.petFed = true;
+		pet.classList.remove("is-eating");
+		updateGauge("pet-love", mock.petLove, PET_LOVE_MAX, mock.petLove >= PET_LOVE_MAX ? ui.pet.mood_fed : ui.pet.mood);
+		const slot = elsewhere.querySelector("[data-slot=\"feed\"]");
+		if (slot) {
+			slot.innerHTML = lockedBanner(ui.pet.fed);
+		}
+	}
+
+	async function claimDaily(button) {
+		button.disabled = true;
+		button.classList.add("is-pressed");
+		await wait(DAILY_MS);
+
+		mock.guildClaimed = true;
+		mock.guildXp = Math.min(GUILD_XP_MAX, mock.guildXp + GUILD_REWARD.xp);
+		player.money += GUILD_REWARD.money;
+		renderVitals();
+		flash("money", GUILD_REWARD.money);
+		updateGauge("guild-xp", mock.guildXp, GUILD_XP_MAX);
+		const slot = elsewhere.querySelector("[data-slot=\"daily\"]");
+		if (slot) {
+			slot.innerHTML = guildReward() + lockedBanner(ui.guild.daily_done);
+		}
+	}
+
+	// ---------- The arena's door: fights are for the app, so a sheet says where to find them ----------
+
+	const phoneScreen = document.querySelector(".phone__screen");
+	const fightTemplate = document.getElementById("demo-fight");
+	let sheet = null;
+	let sheetOpener = null;
+
+	function closeSheet() {
+		if (!sheet) {
+			return;
+		}
+		const closing = sheet;
+		sheet = null;
+		closing.classList.remove("is-open");
+		setTimeout(() => closing.remove(), 250);
+		document.removeEventListener("keydown", onSheetKey);
+		sheetOpener?.focus();
+	}
+
+	function onSheetKey(pressed) {
+		if (pressed.key === "Escape") {
+			closeSheet();
+		}
+	}
+
+	function openFightSheet(button) {
+		if (!fightTemplate || !phoneScreen || sheet) {
+			return;
+		}
+		sheetOpener = button;
+		sheet = document.createElement("div");
+		sheet.className = "sheet-layer";
+		sheet.appendChild(fightTemplate.content.cloneNode(true));
+		sheet.addEventListener("click", clicked => {
+			if (clicked.target.closest("[data-sheet-close]")) {
+				closeSheet();
+			}
+		});
+		phoneScreen.appendChild(sheet);
+		document.addEventListener("keydown", onSheetKey);
+		requestAnimationFrame(() => {
+			sheet?.classList.add("is-open");
+			sheet?.querySelector(".store")?.focus({ preventScroll: true });
+		});
+	}
+
+	const actions = { caress, feed, daily: claimDaily, fight: openFightSheet };
+
+	// ---------- What only the app does: a short word rather than a dead tap ----------
 
 	const toast = document.querySelector("[data-toast]");
 	let toastTimer = null;
@@ -481,7 +658,11 @@
 	}
 
 	elsewhere.addEventListener("click", clicked => {
-		if (clicked.target.closest("[data-in-app]")) {
+		const action = clicked.target.closest("[data-action]");
+		if (action && !action.disabled) {
+			actions[action.dataset.action]?.(action);
+		}
+		else if (clicked.target.closest("[data-in-app]")) {
 			inAppOnly();
 		}
 	});

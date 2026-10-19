@@ -88,6 +88,17 @@
       <button class="text-button" type="button" data-restart>{{ t.demo_ui.retry }}</button>
     </div>
   </template>
+  <template id="demo-fight">
+    <div class="sheet-backdrop" data-sheet-close></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="demo-fight-title">
+      <span class="sheet__grip" aria-hidden="true"></span>
+      <div class="sheet__emblem">{% include emoji.html e="2694" %}</div>
+      <p class="sheet__title" id="demo-fight-title">{{ t.demo_ui.arena.fight_title }}</p>
+      <p class="sheet__text">{{ t.demo_ui.arena.fight_text }}</p>
+      {% include stores.html stacked=true %}
+      <button class="text-button" type="button" data-sheet-close>{{ t.demo_ui.arena.later }}</button>
+    </div>
+  </template>
   <script type="application/json" id="demo-data">
   {
     "lang": {{ lang | jsonify }},

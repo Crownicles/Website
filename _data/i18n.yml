@@ -140,16 +140,16 @@ fr:
       league: Ligue
       campaign: Campagne
       progress: Progression
-      information: Informations
-      guild: Guilde
-      pet: Familier
     pet:
       eyebrow: Votre familier
       name: Pistache
       subtitle: Renard · Rare · Mâle
       mood: Apprivoisé
+      mood_fed: Dressé
       feed: Nourrir Pistache
-      actions: [Caresser, Expédition, Renommer]
+      fed: Pistache n'a pas encore faim, son prochain repas sera possible demain.
+      had_enough: Pistache en a assez des câlins et s'éloigne un instant.
+      actions: [Caresser, Expédition]
     guild:
       eyebrow: Guilde
       name: Les Pinces d'Or
@@ -159,7 +159,10 @@ fr:
       rank: Classement
       description: Entraide, bonne humeur et grandes pêches à la Rivière aux Crabes.
       daily: Bonus de guilde
-      actions: [Entrepôt, Refuge, Classement]
+      daily_done: Prochain bonus de guilde dans 23 h
+      reward: Récompense de la guilde
+      reward_money: Argent
+      reward_xp: Expérience de guilde
       members: Membres
       you: Vous
       level_short: Niveau {n}
@@ -174,7 +177,9 @@ fr:
       glory: Gloire
       league: Ligue
       start: Chercher un adversaire
-      actions: [Classes, Historique, Ligues, Classements]
+      fight_title: Envie de combattre ?
+      fight_text: Les duels contre les autres joueurs se jouent dans l'app et sur Discord. Venez défier l'arène !
+      later: Plus tard
 
 en:
   locale: en_US
@@ -318,16 +323,16 @@ en:
       league: League
       campaign: Campaign
       progress: Progress
-      information: Information
-      guild: Guild
-      pet: Pet
     pet:
       eyebrow: Your pet
       name: Pistachio
       subtitle: Fox · Rare · Male
       mood: Tamed
+      mood_fed: Trained
       feed: Feed Pistachio
-      actions: [Caress, Expedition, Rename]
+      fed: Pistachio is not hungry yet, its next meal will be possible tomorrow.
+      had_enough: Pistachio has had enough cuddles and steps away for a moment.
+      actions: [Caress, Expedition]
     guild:
       eyebrow: Guild
       name: The Golden Claws
@@ -337,7 +342,10 @@ en:
       rank: Rank
       description: Mutual help, good spirits and big catches at Crabs' River.
       daily: Guild bonus
-      actions: [Storage, Shelter, Ranking]
+      daily_done: Next guild bonus in 23 h
+      reward: Guild reward
+      reward_money: Money
+      reward_xp: Guild experience
       members: Members
       you: You
       level_short: Level {n}
@@ -352,4 +360,6 @@ en:
       glory: Glory
       league: League
       start: Find an opponent
-      actions: [Classes, History, Leagues, Rankings]
+      fight_title: Ready to fight?
+      fight_text: Duels against other players are fought in the app and on Discord. Come and take on the arena!
+      later: Maybe later
