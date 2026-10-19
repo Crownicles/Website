@@ -21,6 +21,8 @@ fr:
     title: Un jeu d'aventure médiéval, sur mobile et Discord.
   demo:
     noscript: Activez JavaScript pour jouer.
+    try: Essayez !
+    try_hint: Ce téléphone est jouable
   map:
     title: Le royaume
     text: 55 lieux à parcourir.
@@ -116,6 +118,63 @@ fr:
     hours: "{h} h"
     hours_minutes: "{h} h {m}"
     tabs: [Aventure, Profil, Familier, Guilde, Arène]
+    tabs_label: Onglets de l'app
+    in_app: À découvrir dans l'app
+    settings: Réglages
+    experience: Expérience
+    energy: Énergie
+    league_name: Ligue argent
+    profile:
+      eyebrow: Profil
+      subtitle: Paladin · niveau 12 · Rivière aux Crabes
+      actions: [Inventaire, Guide, Bénédictions]
+      statistics: Statistiques
+      attack: Attaque
+      defense: Défense
+      speed: Vitesse
+      score_rank: Score et Rang
+      rankings: Classements
+      score: Score
+      glory: Points de gloire
+      rank: Classement
+      league: Ligue
+      campaign: Campagne
+      progress: Progression
+      information: Informations
+      guild: Guilde
+      pet: Familier
+    pet:
+      eyebrow: Votre familier
+      name: Pistache
+      subtitle: Renard · Rare · Mâle
+      mood: Apprivoisé
+      feed: Nourrir Pistache
+      actions: [Caresser, Expédition, Renommer]
+    guild:
+      eyebrow: Guilde
+      name: Les Pinces d'Or
+      level: Niveau 18
+      score: Score
+      treasury: Trésorerie
+      rank: Classement
+      description: Entraide, bonne humeur et grandes pêches à la Rivière aux Crabes.
+      daily: Bonus de guilde
+      actions: [Entrepôt, Refuge, Classement]
+      members: Membres
+      you: Vous
+      level_short: Niveau {n}
+      roles:
+        chief: Chef
+        elder: Aîné
+        member: Membre
+    arena:
+      eyebrow: Combat
+      title: Arène
+      subtitle: Paladin · Niveau 12
+      glory: Gloire
+      league: Ligue
+      start: Chercher un adversaire
+      actions: [Classes, Historique, Ligues, Classements]
 
 en:
   locale: en_US
@@ -140,6 +199,8 @@ en:
     title: A medieval adventure game, on mobile and Discord.
   demo:
     noscript: Enable JavaScript to play.
+    try: Try it!
+    try_hint: This phone is playable
   map:
     title: The kingdom
     text: 55 places to travel.
@@ -218,7 +279,7 @@ en:
     next_stop: Next stop
     collected: Points earned
     now: Now
-    advance: Advance · 1 token
+    advance: Forward · 1 token
     journal: Traveller's journal
     your_action: Your action
     answering: Sending your choice…
@@ -235,3 +296,60 @@ en:
     hours: "{h} h"
     hours_minutes: "{h} h {m}"
     tabs: [Adventure, Profile, Pet, Guild, Arena]
+    tabs_label: App tabs
+    in_app: Discover it in the app
+    settings: Settings
+    experience: Experience
+    energy: Energy
+    league_name: Silver league
+    profile:
+      eyebrow: Profile
+      subtitle: Paladin · level 12 · Crabs' River
+      actions: [Inventory, Guide, Blessings]
+      statistics: Statistics
+      attack: Attack
+      defense: Defense
+      speed: Speed
+      score_rank: Score and Rank
+      rankings: Rankings
+      score: Score
+      glory: Glory points
+      rank: Rank
+      league: League
+      campaign: Campaign
+      progress: Progress
+      information: Information
+      guild: Guild
+      pet: Pet
+    pet:
+      eyebrow: Your pet
+      name: Pistachio
+      subtitle: Fox · Rare · Male
+      mood: Tamed
+      feed: Feed Pistachio
+      actions: [Caress, Expedition, Rename]
+    guild:
+      eyebrow: Guild
+      name: The Golden Claws
+      level: Level 18
+      score: Score
+      treasury: Treasury
+      rank: Rank
+      description: Mutual help, good spirits and big catches at Crabs' River.
+      daily: Guild bonus
+      actions: [Storage, Shelter, Ranking]
+      members: Members
+      you: You
+      level_short: Level {n}
+      roles:
+        chief: Chief
+        elder: Elder
+        member: Member
+    arena:
+      eyebrow: Fight
+      title: Arena
+      subtitle: Paladin · Level 12
+      glory: Glory
+      league: League
+      start: Find an opponent
+      actions: [Classes, History, Leagues, Rankings]

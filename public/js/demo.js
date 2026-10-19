@@ -7,11 +7,17 @@
 	"use strict";
 
 	const dataNode = document.getElementById("demo-data");
-	const screen = document.querySelector("[data-demo-screen]");
+	const viewport = document.querySelector("[data-demo-screen]");
 	const endTemplate = document.getElementById("demo-end");
-	if (!dataNode || !screen || !endTemplate) {
+	if (!dataNode || !viewport || !endTemplate) {
 		return;
 	}
+
+	// The adventure keeps its own layer, so a look at another tab never loses where the story stands.
+	const screen = document.createElement("div");
+	const elsewhere = document.createElement("div");
+	elsewhere.hidden = true;
+	viewport.replaceChildren(screen, elsewhere);
 
 	const data = JSON.parse(dataNode.textContent);
 	const ui = data.ui;
@@ -85,11 +91,27 @@
 		}
 	}
 
-	/** The phone keeps its size: a new screen only scrolls its own content back to the top. */
+	const siteHeader = document.querySelector(".site-header");
+	let started = false;
+
+	/**
+	 * A new screen starts at its top. On a computer the phone scrolls its own content; on a small screen the
+	 * page does, so it is the page that comes back to the top of the screen if the visitor had gone past it.
+	 */
+	function backToTop({ smooth = false } = {}) {
+		viewport.scrollTo({ top: 0, behavior: smooth ? "smooth" : "auto" });
+		const above = viewport.getBoundingClientRect().top - (siteHeader ? siteHeader.offsetHeight : 0);
+		if (above < 0) {
+			window.scrollBy({ top: above - 12, behavior: smooth ? "smooth" : "auto" });
+		}
+	}
+
 	function show(html, { tabs = false } = {}) {
 		stopCreep();
 		screen.innerHTML = `<div class="app-view">${html}</div>`;
-		screen.scrollTop = 0;
+		if (started) {
+			backToTop();
+		}
 
 		// As in the app, an event holds the player on the adventure: the tab bar is hidden until it is over.
 		if (capsule) {
@@ -275,7 +297,7 @@
 	// ---------- 4. Where to go on ----------
 
 	function renderEnd() {
-		show("");
+		show("", { tabs: true });
 		screen.firstElementChild.appendChild(endTemplate.content.cloneNode(true));
 		screen.querySelector("[data-restart]").addEventListener("click", () => {
 			player = { ...initialPlayer };
@@ -286,4 +308,198 @@
 
 	renderVitals();
 	renderTravel();
+	started = true;
+
+	// ---------- 5. The other tabs: their front pages as mockups, the pages behind them stay in the app ----------
+
+	const TOAST_MS = 1800;
+	const XP = { value: 1870, max: 2600 };
+	const ENERGY = { value: 64, max: 100 };
+	const GLORY = 1480;
+	const icon = paths => `<svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
+	const STAR = icon("<path d=\"M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z\"/>");
+	const HEART = icon("<path d=\"M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z\"/>");
+	const GIFT = icon("<rect x=\"3\" y=\"8\" width=\"18\" height=\"4\" rx=\"1\"/><path d=\"M12 8v13\"/><path d=\"M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7\"/><path d=\"M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5\"/>");
+	const SWORDS = icon("<path d=\"m13 19 6-6\"/><path d=\"M14.5 17.5 3.586 6.586A2 2 0 013 5.172V3h2.172a2 2 0 011.414.586L17.5 14.5\"/><path d=\"m14.828 6.172 2.586-2.586A2 2 0 0118.828 3H21v2.172a2 2 0 01-.586 1.414l-2.586 2.586\"/><path d=\"m16 16 4 4\"/><path d=\"m19 21 2-2\"/><path d=\"m5 14 4 4\"/><path d=\"m5 21-2-2\"/><path d=\"M7.5 16.5 4 20\"/>");
+
+	const count = value => numberFormat.format(value);
+
+	function gauge(label, glyph, value, max, tone) {
+		return `<div class="gauge" style="--tone: var(--${tone})">
+			<div class="gauge__head"><span>${glyph}${escapeHtml(label)}</span><b>${count(value)} / ${count(max)}</b></div>
+			<div class="gauge__track"><div class="gauge__fill" style="width: ${(value / max) * 100}%"></div></div>
+		</div>`;
+	}
+
+	/** Same layout as the road's header: emblem, caption, title, then the gauges that belong to it. */
+	function standing(emblem, caption, title, subtitle, gauges = "") {
+		return `<div class="standing standing--still">
+			<div class="standing__emblem">${emblem}</div>
+			<div>
+				<p class="standing__caption">${escapeHtml(caption)}</p>
+				<p class="standing__title">${escapeHtml(title)}</p>
+				${subtitle ? `<p class="standing__subtitle">${subtitle}</p>` : ""}
+			</div>
+		</div>${gauges ? `<div class="gauges">${gauges}</div>` : ""}`;
+	}
+
+	function banner(glyph, label) {
+		return `<button class="action-banner mock-banner" type="button" data-in-app>${glyph}<span>${escapeHtml(label)}</span>${ARROW}</button>`;
+	}
+
+	function quickActions(items) {
+		return `<div class="quick-actions">${items.map(([glyph, label]) => `<button class="quick-action" type="button" data-in-app>${emoji(glyph)}<span>${escapeHtml(label)}</span></button>`).join("")}</div>`;
+	}
+
+	function figures(items) {
+		return `<div class="figures figures--panel">${items.map(([label, value]) => `<div class="figure"><span>${escapeHtml(label)}</span><b>${value}</b></div>`).join("")}</div>`;
+	}
+
+	function keyValues(items) {
+		return `<div class="list">${items.map(([label, value]) => `<div class="key-value"><span>${escapeHtml(label)}</span><b>${value}</b></div>`).join("")}</div>`;
+	}
+
+	function rows(items) {
+		return `<div class="list">${items.map(item => `<button class="list__row" type="button" data-in-app>
+			<span class="list__emblem">${emoji(item.icon)}</span>
+			<span class="list__text"><b>${escapeHtml(item.title)}${item.self ? ` <em>${escapeHtml(ui.guild.you)}</em>` : ""}</b><span>${escapeHtml(item.subtitle)}</span></span>
+			${item.value ? `<span class="list__value">${item.value}</span>` : ""}
+		</button>`).join("")}</div>`;
+	}
+
+	function section(title, body, { glyph, hint, action } = {}) {
+		const side = action
+			? `<button class="mock-section__action" type="button" data-in-app>${escapeHtml(action)}</button>`
+			: hint ? `<span class="mock-section__hint">${escapeHtml(hint)}</span>` : "";
+		return `<section class="mock-section">
+			<div class="mock-section__head"><p class="section-header">${glyph ? emoji(glyph) : ""}${escapeHtml(title)}</p>${side}</div>
+			${body}
+		</section>`;
+	}
+
+	function renderProfile() {
+		const text = ui.profile;
+		return `
+			${standing(emoji("⚜️"), text.eyebrow, ui.hero, escapeHtml(text.subtitle),
+				gauge(ui.health, emoji("❤️"), player.health, player.maxHealth, "red")
+				+ gauge(ui.energy, emoji("⚡"), ENERGY.value, ENERGY.max, "green")
+				+ gauge(ui.experience, STAR, XP.value, XP.max, "gold"))}
+			${quickActions([["📦", text.actions[0]], ["📖", text.actions[1]], ["⛩️", text.actions[2]]])}
+			${section(text.statistics, figures([[text.attack, count(142)], [text.defense, count(118)], [text.speed, count(96)]]), { glyph: "🗡️" })}
+			${section(text.score_rank, figures([[text.score, `${emoji("🏅")}${count(player.score)}`], [text.glory, `${emoji("✨")}${count(GLORY)}`]])
+				+ keyValues([[text.rank, `${count(3412)} / ${count(48920)}`], [text.league, `${emoji("🥈")}${escapeHtml(ui.league_name)}`]]), { glyph: "🏆", action: text.rankings })}
+			${section(text.campaign, `<div class="panel">${gauge(text.progress, "", 34, 70, "ink")}</div>`, { glyph: "📖" })}
+			${section(text.information, rows([
+				{ icon: "🏟️", title: ui.guild.name, subtitle: text.guild },
+				{ icon: "🦊", title: ui.pet.name, subtitle: text.pet }
+			]))}
+		`;
+	}
+
+	function renderPet() {
+		const text = ui.pet;
+		return `
+			<div class="pet-standing">${standing(emoji("🦊"), text.eyebrow, text.name, `${escapeHtml(text.subtitle)} ${emoji("♂️")}`, gauge(text.mood, HEART, 4, 5, "green"))}</div>
+			${banner(emoji("🍖"), text.feed)}
+			${quickActions([["😻", text.actions[0]], ["🗺️", text.actions[1]], ["🖋️", text.actions[2]]])}
+		`;
+	}
+
+	function renderGuild() {
+		const text = ui.guild;
+		const roles = text.roles;
+		const member = (icon, title, role, level, score, self = false) => ({
+			icon, title, self, subtitle: `${role} · ${format(text.level_short, { n: level })}`, value: `${emoji("🏅")}${count(score)}`
+		});
+		const members = [
+			member("👑", "Aldric", roles.chief, 41, 18420),
+			member("🎖️", "Mirelle", roles.elder, 33, 11960),
+			member("⚫", ui.hero, roles.member, 12, player.score, true),
+			member("⚫", "Bastien", roles.member, 27, 7310),
+			member("⚫", "Ysolde", roles.member, 19, 4880),
+			member("⚫", "Gauvain", roles.member, 8, 960)
+		];
+		return `
+			${standing(emoji("🏟️"), text.eyebrow, text.name, escapeHtml(text.level), gauge(ui.experience, STAR, 7420, 9800, "gold"))}
+			${figures([[text.score, `${emoji("🏅")}${count(48210)}`], [text.treasury, `${emoji("💰")}${count(12400)}`], [text.rank, `${count(214)} / ${count(3980)}`]])}
+			<p class="mock-note">${escapeHtml(text.description)}</p>
+			${banner(GIFT, text.daily)}
+			${quickActions([["🍬", text.actions[0]], ["🐾", text.actions[1]], ["🏆", text.actions[2]]])}
+			${section(text.members, rows(members), { hint: String(members.length) })}
+		`;
+	}
+
+	function renderArena() {
+		const text = ui.arena;
+		return `
+			${standing(SWORDS, text.eyebrow, text.title, "")}
+			<div class="arena-identity">${rows([{ icon: "⚜️", title: ui.hero, subtitle: text.subtitle }])}</div>
+			<div class="panel">${gauge(ui.energy, emoji("⚡"), ENERGY.value, ENERGY.max, "green")}</div>
+			${figures([[text.glory, `${emoji("✨")}${count(GLORY)}`], [text.league, `${emoji("🥈")}${escapeHtml(ui.league_name)}`]])}
+			${banner(emoji("⚔️"), text.start)}
+			${quickActions([["⚜️", text.actions[0]], ["📜", text.actions[1]], ["🥈", text.actions[2]], ["🏆", text.actions[3]]])}
+		`;
+	}
+
+	const mockups = { profile: renderProfile, pet: renderPet, guild: renderGuild, arena: renderArena };
+	const tabButtons = Array.from(document.querySelectorAll("[data-tab]"));
+	let openTab = "adventure";
+
+	function selectTab(name) {
+		if (name === openTab) {
+			backToTop({ smooth: true });
+			return;
+		}
+		openTab = name;
+		tabButtons.forEach(button => {
+			const focused = button.dataset.tab === name;
+			button.classList.toggle("is-focused", focused);
+			button.setAttribute("aria-selected", String(focused));
+		});
+		const away = name in mockups;
+		screen.hidden = away;
+		elsewhere.hidden = !away;
+		elsewhere.innerHTML = away ? `<div class="app-view">${mockups[name]()}</div>` : "";
+		backToTop();
+	}
+
+	tabButtons.forEach(button => button.addEventListener("click", () => selectTab(button.dataset.tab)));
+
+	// ---------- 6. What only the app does: a short word rather than a dead tap ----------
+
+	const toast = document.querySelector("[data-toast]");
+	let toastTimer = null;
+
+	function inAppOnly() {
+		if (!toast) {
+			return;
+		}
+		toast.textContent = ui.in_app;
+		toast.classList.add("is-shown");
+		clearTimeout(toastTimer);
+		toastTimer = setTimeout(() => toast.classList.remove("is-shown"), TOAST_MS);
+	}
+
+	elsewhere.addEventListener("click", clicked => {
+		if (clicked.target.closest("[data-in-app]")) {
+			inAppOnly();
+		}
+	});
+	document.querySelector(".app-header__gear")?.addEventListener("click", inAppOnly);
+
+	// ---------- 7. The invitation to play, until the visitor touches the phone ----------
+
+	const phone = document.querySelector("[data-phone]");
+	const cue = document.querySelector("[data-try-cue]");
+	if (phone && cue) {
+		const reveal = new IntersectionObserver(entries => {
+			if (entries.some(entry => entry.isIntersecting)) {
+				cue.classList.add("is-visible");
+				reveal.disconnect();
+			}
+		}, { threshold: 0.35 });
+		reveal.observe(phone);
+
+		phone.addEventListener("click", () => cue.classList.add("is-dismissed"), { once: true });
+	}
 })();

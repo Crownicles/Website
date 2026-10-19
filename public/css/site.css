@@ -479,6 +479,7 @@ a {
 	width: 24px;
 	height: 24px;
 	margin-right: 14px;
+	cursor: pointer;
 }
 
 /* PlayerVitals: health and the total points, then the purse. */
@@ -660,10 +661,43 @@ a {
 	align-items: center;
 	justify-content: center;
 	gap: 8px;
+	min-width: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 24px;
+	background: none;
 	color: var(--muted);
+	font: inherit;
 	font-size: 14px;
 	font-weight: 600;
 	white-space: nowrap;
+	cursor: pointer;
+	transition: flex-grow 0.25s ease, background-color 0.2s, color 0.2s;
+}
+
+@media (hover: hover) {
+	.capsule__tab:hover:not(.is-focused) {
+		color: var(--ink);
+	}
+}
+
+.capsule__tab:not(.is-focused) .capsule__label {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+}
+
+.capsule__tab {
+	position: relative;
+}
+
+/* Away from the adventure, the ring stays on its idle tab, drawn on the capsule rather than the pill. */
+.capsule__tab:not(.is-focused) .ring {
+	background:
+		radial-gradient(closest-side, var(--paper) calc(100% - 2px), transparent calc(100% - 2px) 100%),
+		conic-gradient(currentColor calc(var(--progress) * 1%), var(--line) 0);
 }
 
 .capsule__tab svg {
@@ -707,6 +741,453 @@ a {
 	syntax: "<number>";
 	inherits: false;
 	initial-value: 0;
+}
+
+/* ---------- Demo: the other tabs, as mockups ---------- */
+
+.standing--still .standing__emblem .emoji {
+	animation: none;
+}
+
+.standing__emblem .glyph {
+	width: 26px;
+	height: 26px;
+}
+
+.standing__subtitle .emoji {
+	width: 12px;
+	height: 12px;
+	vertical-align: -2px;
+}
+
+.gauges {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-top: 16px;
+}
+
+.gauge__head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 5px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.gauge__head span {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	color: var(--muted);
+}
+
+.gauge__head .emoji,
+.gauge__head .glyph {
+	width: 13px;
+	height: 13px;
+}
+
+.gauge__head .glyph {
+	color: var(--tone);
+}
+
+.gauge__head b {
+	font-variant-numeric: tabular-nums;
+}
+
+.gauge__track {
+	height: 5px;
+	border-radius: var(--pill);
+	background: var(--line);
+	overflow: hidden;
+}
+
+.gauge__fill {
+	height: 100%;
+	border-radius: var(--pill);
+	background: var(--tone);
+}
+
+.quick-actions {
+	display: flex;
+	gap: 8px;
+	margin: 18px 0 4px;
+}
+
+.quick-action {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	min-width: 0;
+	min-height: 72px;
+	padding: 10px 4px;
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	background: var(--paper);
+	color: var(--ink);
+	font: inherit;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 15px;
+	text-align: center;
+	cursor: pointer;
+}
+
+@media (hover: hover) {
+	.quick-action:hover {
+		background: var(--wash);
+	}
+}
+
+.quick-action .emoji {
+	width: 22px;
+	height: 22px;
+}
+
+.mock-banner {
+	margin-top: 18px;
+}
+
+.mock-banner .emoji,
+.mock-banner .glyph {
+	width: 20px;
+	height: 20px;
+}
+
+.mock-section {
+	margin-top: 22px;
+}
+
+.mock-section__head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	margin-bottom: 9px;
+}
+
+.mock-section__head .section-header {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0;
+}
+
+.mock-section__head .section-header .emoji {
+	width: 16px;
+	height: 16px;
+}
+
+.mock-section__hint,
+.mock-section__action {
+	color: var(--muted);
+	font-size: 12.5px;
+	font-weight: 600;
+}
+
+.mock-section__action {
+	padding: 0;
+	border: 0;
+	background: none;
+	font-family: inherit;
+	cursor: pointer;
+}
+
+@media (hover: hover) {
+	.mock-section__action:hover {
+		color: var(--ink);
+	}
+}
+
+.figures--panel,
+.panel,
+.list {
+	border-radius: var(--radius);
+	background: var(--paper);
+	box-shadow: var(--card-shadow);
+}
+
+.figures.figures--panel {
+	grid-auto-flow: column;
+	grid-template-columns: none;
+	margin-top: 14px;
+	padding: 12px 14px;
+}
+
+.mock-section .figures.figures--panel {
+	margin-top: 0;
+}
+
+.figures--panel .figure b {
+	font-size: 15px;
+}
+
+.figures--panel .figure b .emoji {
+	width: 14px;
+	height: 14px;
+}
+
+.mock-section .figures--panel + .list {
+	margin-top: 8px;
+}
+
+.panel {
+	margin-top: 14px;
+	padding: 12px 14px;
+}
+
+.mock-section .panel {
+	margin-top: 0;
+}
+
+.list {
+	overflow: hidden;
+}
+
+.key-value,
+.list__row {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	width: 100%;
+	padding: 12px 14px;
+	border: 0;
+	background: none;
+	color: var(--ink);
+	font: inherit;
+	text-align: left;
+}
+
+.key-value + .key-value,
+.list__row + .list__row {
+	border-top: 1px solid var(--line);
+}
+
+.key-value {
+	justify-content: space-between;
+	font-size: 13px;
+}
+
+.key-value span {
+	color: var(--muted);
+}
+
+.key-value b {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	font-variant-numeric: tabular-nums;
+}
+
+.key-value .emoji {
+	width: 14px;
+	height: 14px;
+}
+
+.list__row {
+	cursor: pointer;
+}
+
+@media (hover: hover) {
+	.list__row:hover {
+		background: var(--wash);
+	}
+}
+
+.list__emblem {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	background: var(--wash);
+}
+
+.list__emblem .emoji {
+	width: 19px;
+	height: 19px;
+}
+
+.list__text {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+}
+
+.list__text b {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.list__text em {
+	color: var(--green);
+	font-size: 12px;
+	font-style: normal;
+}
+
+.list__text > span {
+	color: var(--muted);
+	font-size: 12px;
+}
+
+.list__value {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	font-size: 13px;
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+}
+
+.list__value .emoji {
+	width: 13px;
+	height: 13px;
+}
+
+.arena-identity {
+	margin-top: 16px;
+}
+
+.mock-note {
+	margin: 14px 0 0;
+	color: var(--muted);
+	font-size: 13px;
+	line-height: 19px;
+}
+
+/* What only the app does is said in a small pill above the tab bar, rather than left as a dead tap. */
+.phone-toast {
+	position: absolute;
+	bottom: 112px;
+	left: 50%;
+	z-index: 3;
+	margin: 0;
+	padding: 8px 14px;
+	transform: translate(-50%, 8px);
+	border-radius: var(--pill);
+	background: var(--ink);
+	color: var(--paper);
+	box-shadow: var(--capsule-shadow);
+	font-size: 12.5px;
+	font-weight: 600;
+	white-space: nowrap;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.2s, transform 0.2s;
+}
+
+.phone-toast.is-shown {
+	transform: translate(-50%, 0);
+	opacity: 1;
+}
+
+/* ---------- Demo: the invitation to play ---------- */
+
+.demo-stage {
+	position: relative;
+}
+
+.try-cue {
+	position: absolute;
+	top: 380px;
+	right: calc(50% + 215px);
+	display: flex;
+	align-items: flex-start;
+	gap: 4px;
+	margin: 0;
+	color: var(--gold);
+	opacity: 0;
+	transform: translateY(10px) rotate(-4deg);
+	transition: opacity 0.5s ease, transform 0.5s ease;
+	pointer-events: none;
+}
+
+.try-cue.is-visible {
+	opacity: 1;
+	transform: rotate(-4deg);
+}
+
+.try-cue.is-dismissed {
+	opacity: 0;
+	transform: translateY(-6px) rotate(-4deg);
+}
+
+.try-cue__text {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	text-align: right;
+}
+
+.try-cue__text strong {
+	font-size: 30px;
+	font-weight: 800;
+	letter-spacing: -0.03em;
+	line-height: 1.1;
+}
+
+.try-cue__text span {
+	color: var(--muted);
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.try-cue__arrow {
+	flex-shrink: 0;
+	width: 96px;
+	height: 72px;
+	margin-top: 14px;
+	animation: nudge 1.6s ease-in-out infinite;
+}
+
+@keyframes nudge {
+	50% {
+		transform: translate(6px, 4px);
+	}
+}
+
+/* Without room beside the phone, the invitation sits above it and points down. */
+@media (max-width: 900px) {
+	.try-cue {
+		position: static;
+		justify-content: center;
+		margin: 0 auto 6px;
+		transform: none;
+	}
+
+	.try-cue.is-visible {
+		transform: none;
+	}
+
+	.try-cue.is-dismissed {
+		display: none;
+	}
+
+	.try-cue__text {
+		align-items: center;
+		text-align: center;
+	}
+
+	.try-cue__text strong {
+		font-size: 24px;
+	}
+
+	.try-cue__arrow {
+		width: 46px;
+		height: 50px;
+		margin-top: 8px;
+		transform: rotate(40deg);
+		animation: none;
+	}
 }
 
 .home-indicator {
@@ -792,8 +1273,10 @@ a {
 	cursor: pointer;
 }
 
-.choice:hover:not(:disabled) {
-	border-color: var(--faint);
+@media (hover: hover) {
+	.choice:hover:not(:disabled) {
+		border-color: var(--faint);
+	}
 }
 
 .choice:disabled {
@@ -886,8 +1369,10 @@ a {
 	text-align: left;
 }
 
-.action-banner:hover {
-	opacity: 0.85;
+@media (hover: hover) {
+	.action-banner:hover {
+		opacity: 0.85;
+	}
 }
 
 /* ---------- Demo: the travel screen ---------- */
@@ -1066,8 +1551,10 @@ a {
 	cursor: default;
 }
 
-.action-banner:disabled:hover {
-	opacity: 1;
+@media (hover: hover) {
+	.action-banner:disabled:hover {
+		opacity: 1;
+	}
 }
 
 .action-banner .emoji {
@@ -1147,8 +1634,10 @@ a {
 	cursor: pointer;
 }
 
-.text-button:hover {
-	color: var(--ink);
+@media (hover: hover) {
+	.text-button:hover {
+		color: var(--ink);
+	}
 }
 
 /* ---------- The kingdom's map: a small card, the map is there for the curious ---------- */
@@ -1715,6 +2204,49 @@ a {
 		flex: 1 1 100%;
 		justify-content: center;
 	}
+}
+
+/*
+ * On a phone, the demo's phone is as wide as the screen and taller than it: a scroller inside it would catch the
+ * finger and hold the page. So the frame grows with its content, the page alone scrolls, and the tab bar stays
+ * at the bottom of the screen as it does in the app.
+ */
+@media (max-width: 600px) {
+	.phone {
+		aspect-ratio: auto;
+	}
+
+	.phone__screen {
+		min-height: 620px;
+		overflow: clip;
+	}
+
+	.app-content {
+		flex: 1 0 auto;
+		overflow: visible;
+	}
+
+	.capsule-bar {
+		position: sticky;
+		bottom: 0;
+		z-index: 2;
+		padding-bottom: max(26px, env(safe-area-inset-bottom));
+		background: linear-gradient(transparent, var(--wash) 30%);
+	}
+
+	.phone-toast {
+		position: fixed;
+		bottom: 120px;
+	}
+
+	.home-indicator {
+		z-index: 3;
+	}
+}
+
+.phone {
+	-webkit-tap-highlight-color: transparent;
+	touch-action: manipulation;
 }
 
 @media (prefers-reduced-motion: reduce) {
