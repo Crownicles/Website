@@ -1,0 +1,20 @@
+# Keeps the actions and the gems of the site build up to date, so that a runner image update does not break the deployment
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+
+  - package-ecosystem: "bundler"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    groups:
+      gems:
+        patterns:
+          - "*"
