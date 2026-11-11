@@ -1856,6 +1856,59 @@ a {
 	}
 }
 
+/* ---------- The trailer: its YouTube thumbnail, swapped for the player on click ---------- */
+
+.trailer {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	aspect-ratio: 16 / 9;
+	border-radius: var(--radius);
+	background: var(--bezel);
+	box-shadow: var(--capsule-shadow);
+}
+
+.trailer img,
+.trailer iframe {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+
+.trailer img {
+	transition: transform 0.4s ease;
+}
+
+.trailer__watch {
+	position: absolute;
+	left: 5.6%;
+	bottom: 7%;
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+	transition: transform 0.2s ease;
+}
+
+@media (hover: hover) {
+	.trailer:hover img {
+		transform: scale(1.03);
+	}
+
+	.trailer:hover .trailer__watch {
+		opacity: 1;
+		transform: translateY(-2px);
+	}
+}
+
+@media (max-width: 560px) {
+	.trailer__watch {
+		left: 4%;
+		bottom: 5%;
+		min-height: 34px;
+		padding: 6px 14px;
+		font-size: 13px;
+	}
+}
+
 /* ---------- The kingdom's map: a small card, the map is there for the curious ---------- */
 
 .worlds {

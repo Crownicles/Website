@@ -23,6 +23,11 @@ fr:
     noscript: Activez JavaScript pour jouer.
     try: Essayez !
     try_hint: Ce téléphone est jouable
+  trailer:
+    youtube: 33nH7YrcgH4
+    image: trailer-fr
+    watch: Regarder le trailer
+    title: Crownicles – Trailer officiel
   map:
     title: Le royaume
     text: 55 lieux à parcourir.
@@ -206,6 +211,11 @@ en:
     noscript: Enable JavaScript to play.
     try: Try it!
     try_hint: This phone is playable
+  trailer:
+    youtube: c9sCnmBnnvc
+    image: trailer-en
+    watch: Watch the trailer
+    title: Crownicles – Official trailer
   map:
     title: The kingdom
     text: 55 places to travel.

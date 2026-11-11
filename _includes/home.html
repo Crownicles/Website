@@ -118,6 +118,7 @@
   <script src="{{ '/public/js/stats.js' | relative_url }}?v={{ site.time | date: '%s' }}" data-lang="{{ lang }}" defer></script>
 </section>
 
+
 <section class="block" id="app">
   <div class="wrap facts">
     {%- for fact in t.facts %}
@@ -162,6 +163,17 @@
       </div>
     </div>
   </div>
+</section>
+
+<section class="block" id="trailer">
+  <div class="wrap">
+    {%- assign trailer_base = '/public/ressources/trailer/' | append: t.trailer.image | relative_url %}
+    <a class="trailer" href="https://www.youtube.com/watch?v={{ t.trailer.youtube }}" target="_blank" rel="noopener" data-youtube="{{ t.trailer.youtube }}" data-title="{{ t.trailer.title }}">
+      <img src="{{ trailer_base }}-1280.webp" srcset="{{ trailer_base }}-640.webp 640w, {{ trailer_base }}-1280.webp 1280w" sizes="(max-width: 1000px) 100vw, 1040px" alt="" width="1280" height="720" loading="lazy" decoding="async">
+      <span class="trailer__watch btn btn--light"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>{{ t.trailer.watch }}</span>
+    </a>
+  </div>
+  <script src="{{ '/public/js/trailer.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
 </section>
 
 <section class="block">
